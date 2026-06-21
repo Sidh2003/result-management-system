@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examination Results | SAM Global University</title>
+    <title>Online Bus Fee Transaction History | SAM Global University</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
@@ -14,7 +14,11 @@
             --navy-900: #0a1840;
             --blue-500: #2563eb;
             --blue-600: #1d4ed8;
+            --blue-100: #dbeafe;
             --green-600: #1e9e57;
+            --green-100: #c9ecd9;
+            --red-600: #dc2626;
+            --red-100: #fde2e2;
             --teal-500: #1391b0;
             --orange-500: #f4811f;
             --purple-500: #7e3fd1;
@@ -31,7 +35,6 @@
             --white: #ffffff;
             --pink-100: #fbd9de;
             --pink-200: #f7c2cb;
-            --green-100: #c9ecd9;
             --radius: 8px;
             --radius-sm: 5px;
             --shadow: 0 2px 10px rgba(20, 30, 60, .06);
@@ -320,6 +323,12 @@
             flex: none;
         }
 
+        .nav-sub a.active {
+            color: var(--blue-500);
+            font-weight: 600;
+            background: var(--blue-100);
+        }
+
         .mentor-block {
             text-align: center;
             padding-top: 18px;
@@ -352,197 +361,277 @@
         }
 
         /* =====================================================
-           MAIN CONTENT GRID
+           MAIN CONTENT
         ===================================================== */
         .main-content {
             flex: 1;
             min-width: 0;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
         }
 
-        .main-col {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            min-width: 0;
-        }
-
-        .side-col {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            min-width: 0;
-        }
-
-        /* ---------- shared card ---------- */
         .card {
             background: var(--white);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 18px 24px 22px;
+            padding: 22px 26px 28px;
         }
 
-        .card-title {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            font-size: 1.02rem;
-            font-weight: 600;
-            color: var(--blue-500);
-            margin-bottom: 4px;
-        }
-
-        .card-title.title-green {
-            color: var(--green-600);
-        }
-
-        .card-title svg {
-            width: 19px;
-            height: 19px;
-            flex: none;
-        }
-
-        /* =====================================================
-           RESULTS PAGE
-        ===================================================== */
-        .results-card {
-            grid-column: 1 / -1;
-        }
-
-        .results-head {
+        /* ---------- page header row ---------- */
+        .page-head-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            margin-bottom: 18px;
             flex-wrap: wrap;
+            margin-bottom: 18px;
         }
 
-        .btn-back {
-            background: var(--gray-700);
-            color: var(--white);
-            font-size: .9rem;
-            font-weight: 600;
-            padding: 10px 22px;
-            border-radius: var(--radius-sm);
-            display: inline-flex;
+        .page-title {
+            display: flex;
             align-items: center;
-            gap: 8px;
-            transition: background .15s ease;
+            gap: 9px;
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 1.32rem;
+            font-weight: 600;
+            color: var(--blue-500);
         }
 
-        .btn-back:hover {
-            background: var(--gray-800);
+        .page-title svg {
+            width: 22px;
+            height: 22px;
+            flex: none;
         }
 
-        .results-table-wrap {
+        .back-btn {
+            background: var(--gray-600);
+            color: var(--white);
+            font-size: .92rem;
+            font-weight: 600;
+            padding: 10px 26px;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+        }
+
+        .back-btn:hover {
+            background: var(--gray-700);
+        }
+
+        /* ---------- summary stat row ---------- */
+        .summary-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .summary-card {
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1.5px solid var(--gray-200);
+        }
+
+        .summary-card .icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: none;
+        }
+
+        .summary-card .icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .summary-card.total {
+            background: var(--blue-100);
+            border-color: #bfdbfe;
+        }
+
+        .summary-card.total .icon {
+            background: var(--blue-500);
+            color: var(--white);
+        }
+
+        .summary-card.paid {
+            background: var(--green-100);
+            border-color: #a7e3c4;
+        }
+
+        .summary-card.paid .icon {
+            background: var(--green-600);
+            color: var(--white);
+        }
+
+        .summary-card.pending {
+            background: var(--red-100);
+            border-color: #f9c2c2;
+        }
+
+        .summary-card.pending .icon {
+            background: var(--red-600);
+            color: var(--white);
+        }
+
+        .summary-text .label {
+            font-size: .85rem;
+            color: var(--gray-600);
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .summary-text .value {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 1.32rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+
+        .summary-card.total .value {
+            color: var(--blue-600);
+        }
+
+        .summary-card.paid .value {
+            color: var(--green-600);
+        }
+
+        .summary-card.pending .value {
+            color: var(--red-600);
+        }
+
+        /* ---------- select session ---------- */
+        .session-block {
+            margin-bottom: 18px;
+        }
+
+        .session-block label {
+            display: block;
+            font-size: .95rem;
+            color: var(--gray-700);
+            margin-bottom: 9px;
+            font-weight: 500;
+        }
+
+        .select-wrap {
+            position: relative;
+            max-width: 260px;
+        }
+
+        .select-wrap select {
+            width: 100%;
+            font-family: inherit;
+            font-size: .92rem;
+            color: var(--gray-700);
+            padding: 11px 38px 11px 14px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .select-wrap::after {
+            content: "";
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            width: 9px;
+            height: 9px;
+            border-right: 2px solid var(--gray-600);
+            border-bottom: 2px solid var(--gray-600);
+            transform: translateY(-65%) rotate(45deg);
+            pointer-events: none;
+        }
+
+        /* ---------- transactions table ---------- */
+        .table-wrap {
             overflow-x: auto;
             border-radius: var(--radius-sm);
             border: 1px solid var(--gray-200);
         }
 
-        .results-table {
+        table.txn-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 760px;
+            min-width: 600px;
         }
 
-        .results-table thead th {
-            background: #aed6f1;
+        table.txn-table thead th {
+            background: #bfdcf2;
             color: var(--gray-800);
             font-size: .9rem;
             font-weight: 600;
             text-align: left;
-            padding: 12px 16px;
+            padding: 12px 18px;
             white-space: nowrap;
         }
 
-        .results-table tbody td {
-            padding: 14px 16px;
+        table.txn-table tbody td {
             font-size: .9rem;
             color: var(--gray-700);
+            padding: 12px 18px;
             border-top: 1px solid var(--gray-200);
-            vertical-align: middle;
+            white-space: nowrap;
         }
 
-        .results-table tbody tr:nth-child(even) {
-            background: #eaf4fc;
+        table.txn-table tbody tr:nth-child(even) {
+            background: #eaf3fb;
         }
 
-        .results-table td.sr-col {
-            width: 50px;
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .85rem;
+            font-weight: 600;
+        }
+
+        .status-pill::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-pill.success {
+            color: var(--green-600);
+        }
+
+        .status-pill.success::before {
+            background: var(--green-600);
+        }
+
+        .status-pill.failed {
+            color: var(--red-600);
+        }
+
+        .status-pill.failed::before {
+            background: var(--red-600);
+        }
+
+        .no-rows {
+            text-align: center;
+            padding: 26px 18px;
+            font-size: .92rem;
             color: var(--gray-500);
         }
 
-        .results-table td.name-col {
-            font-weight: 600;
-            color: var(--gray-800);
-            white-space: nowrap;
-        }
-
-        .results-table td.attach-col {
-            text-align: center;
-            min-width: 180px;
-        }
-
-        .btn-download {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            font-size: .87rem;
-            font-weight: 600;
-            color: #ffffff;
-            background: var(--orange-500);
-            padding: 9px 18px;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            transition: background .15s ease;
-        }
-
-        .btn-download svg {
-            width: 15px;
-            height: 15px;
-            flex: none;
-        }
-
-        .btn-download:hover {
-            background: #d9700f;
-        }
-
-        @media (max-width: 640px) {
-            .results-head {
-                width: 100%;
-            }
-
-            .btn-back {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .results-table {
-                min-width: 680px;
-            }
+        .table-note {
+            margin-top: 16px;
+            font-size: .92rem;
+            font-weight: 700;
+            color: var(--red-600);
+            line-height: 1.5;
         }
 
         /* =====================================================
            FLOATING ELEMENTS
         ===================================================== */
-        .start-tooltip {
-            position: fixed;
-            bottom: 26px;
-            left: 28px;
-            background: var(--white);
-            border: 1px solid var(--gray-300);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
-            border-radius: 4px;
-            padding: 8px 18px;
-            font-size: .88rem;
-            color: var(--gray-700);
-            z-index: 90;
-        }
-
         .scroll-top-fab {
             position: fixed;
             bottom: 26px;
@@ -585,16 +674,6 @@
         /* =====================================================
            RESPONSIVE
         ===================================================== */
-        @media (max-width: 1100px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-
-            .side-col {
-                order: -1;
-            }
-        }
-
         @media (max-width: 900px) {
             .sidebar-toggle {
                 display: flex;
@@ -633,6 +712,10 @@
             .sem-info {
                 display: none;
             }
+
+            .summary-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 640px) {
@@ -660,11 +743,13 @@
                 padding: 16px 16px 18px;
             }
 
-            .start-tooltip {
-                left: 16px;
-                bottom: 16px;
-                font-size: .8rem;
-                padding: 7px 14px;
+            .page-title {
+                font-size: 1.1rem;
+            }
+
+            .back-btn {
+                padding: 9px 18px;
+                font-size: .85rem;
             }
 
             .scroll-top-fab {
@@ -672,6 +757,14 @@
                 bottom: 16px;
                 width: 42px;
                 height: 42px;
+            }
+
+            .summary-card {
+                padding: 14px 16px;
+            }
+
+            .summary-text .value {
+                font-size: 1.12rem;
             }
         }
 
@@ -683,6 +776,12 @@
             .mentor-avatar {
                 width: 54px;
                 height: 54px;
+            }
+
+            table.txn-table thead th,
+            table.txn-table tbody td {
+                padding: 10px 12px;
+                font-size: .82rem;
             }
         }
     </style>
@@ -753,7 +852,8 @@
                         <a href="#"><span class="chevron">&raquo;</span>Attendance Subjwise</a>
                         <a href="#"><span class="chevron">&raquo;</span>Course Outline</a>
                         <a href="#"><span class="chevron">&raquo;</span>Current Backlog</a>
-                        <a href="#" style="padding-left:46px;"><span class="chevron">&raquo;</span>Exam Result</a>
+                        <a href="result.html" style="padding-left:46px;"><span class="chevron">&raquo;</span>Exam
+                            Result</a>
                         <a href="#"><span class="chevron">&raquo;</span>Leave Application</a>
                         <a href="#"><span class="chevron">&raquo;</span>Mentoring Questions</a>
                         <a href="#"><span class="chevron">&raquo;</span>My Grades Till Date</a>
@@ -785,7 +885,8 @@
                         <span class="nav-caret">&#9662;</span>
                     </button>
                     <div class="nav-sub">
-                        <a href="#"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Academic Result /
+                        <a href="result.html"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Academic
+                            Result /
                             Document</a>
                         <a href="#"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Online Class
                             Assignment</a>
@@ -797,7 +898,7 @@
                 </li>
 
                 <!-- FEES -->
-                <li class="nav-item">
+                <li class="nav-item open">
                     <button class="nav-link">
                         <span class="nav-link-left">
                             <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#7e3fd1"
@@ -814,9 +915,9 @@
                             Online*</a>
                         <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Fees Installment
                             Chart</a>
-                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Fees Receipts</a>
-                        <a href="payment.html"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Online
-                            Fee
+
+                        <a href="payment.html" class="active"><span class="chevron"
+                                style="color:#7e3fd1;">&raquo;&raquo;</span>Online Fee
                             Transaction Detail</a>
                         <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Other Fee
                             Print</a>
@@ -1039,85 +1140,78 @@
 
         <!-- ============ MAIN CONTENT ============ -->
         <div class="main-content">
-            <div class="main-col">
+            <div class="card">
 
-                <!-- Examination Results -->
-                <div class="card results-card">
-                    <div class="results-head">
-                        <div class="card-title" style="margin-bottom:0;">
+                <!-- Page Heading + Back button -->
+                <div class="page-head-row">
+                    <div class="page-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                        Online Bus Fee Transaction History
+                    </div>
+                    <button class="back-btn" onclick="window.history.back()">Back</button>
+                </div>
+
+                <!-- Summary totals -->
+                <div class="summary-row">
+
+                    <div class="summary-card paid">
+                        <span class="icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 10 12 5 2 10l10 5 10-5z" />
-                                <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+                                <path d="M20 6 9 17l-5-5" />
                             </svg>
-                            Examination Results
+                        </span>
+                        <div class="summary-text">
+                            <div class="label">Amount Paid</div>
+                            <div class="value" id="paidVal">&#8377;38,000.00</div>
                         </div>
-                        <button class="btn-back" id="backBtn" type="button">Back</button>
                     </div>
 
-                    <div class="results-table-wrap">
-                        <table class="results-table">
-                            <thead>
-                                <tr>
-                                    <th>Sr</th>
-                                    <th>Name</th>
-                                    <th>Class</th>
-                                    <th>Exam Title</th>
-                                    <th>Attachments</th>
-                                </tr>
-                            </thead>
-                            <tbody id="resultsBody">
-                                <tr data-row="1">
-                                    <td class="sr-col">1</td>
-                                    <td class="name-col">CHOUDHARI NITESH SANTOSH</td>
-                                    <td>BBA (Plain) III SEM</td>
-                                    <td>BBA (Plain) III SEM EXAMINATION JUL-DEC 2025</td>
-                                    <td class="attach-col">
-                                        <a class="btn-download" href="assets/sem-3-result.pdf"
-                                            download="BBA-Plain-III-SEM-Result-Jul-Dec-2025.pdf">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <path d="M12 16V4M7 11l5 5 5-5" />
-                                                <path d="M5 20h14" />
-                                            </svg>
-                                            Download Result
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr data-row="2">
-                                    <td class="sr-col">2</td>
-                                    <td class="name-col">CHOUDHARI NITESH SANTOSH</td>
-                                    <td>BBA (Plain) II SEM</td>
-                                    <td>BBA (Plain) II SEM EXAMINATION JAN-JUN 25</td>
-                                    <td class="attach-col">
-                                        <a class="btn-download" href="assets/bba-plain-2-sem-examination-jan-jun-25.pdf"
-                                            download="BBA-Plain-II-SEM-Result-Jan-Jun-25.pdf">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <path d="M12 16V4M7 11l5 5 5-5" />
-                                                <path d="M5 20h14" />
-                                            </svg>
-                                            Download Result
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr data-row="3">
-                                    <td class="sr-col">3</td>
-                                    <td class="name-col">CHOUDHARI NITESH SANTOSH</td>
-                                    <td>BBA (Plain) I SEM</td>
-                                    <td>BBA (Plain) I SEM EXAMINATION JUL-DEC 24</td>
-                                    <td class="attach-col">
-                                        <a class="btn-download" href="assets/sem-1.pdf"
-                                            download="BBA-Plain-I-SEM-Result-Jul-Dec-24.pdf">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <path d="M12 16V4M7 11l5 5 5-5" />
-                                                <path d="M5 20h14" />
-                                            </svg>
-                                            Download Result
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                </div>
+
+                <!-- Select Session -->
+                <div class="session-block">
+                    <label>Select Session:</label>
+                    <div class="select-wrap">
+                        <select id="sessionSelect">
+                            <option value="all">All</option>
+                            <option value="2024-2025">2024-2025</option>
+                            <option value="2025-2026">2025-2026</option>
+                        </select>
                     </div>
                 </div>
+
+                <!-- Transactions Table -->
+                <div class="table-wrap">
+                    <table class="txn-table">
+                        <thead>
+                            <tr>
+                                <th>Transaction Date</th>
+                                <th>Payment Id</th>
+                                <th>Transaction Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="txnTableBody">
+                            <tr data-session="2024-2025">
+                                <td>2024 - 2025</td>
+                                <td>PAY10050621A784591</td>
+                                <td>8000.00</td>
+                                <td><span class="status-pill success">Sucess</span></td>
+                            </tr>
+                            <tr data-session="2025-2026">
+                                <td>2025 - 2026</td>
+                                <td>PAY101060621B913672</td>
+                                <td>8000.00</td>
+                                <td><span class="status-pill success">Sucess</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="table-note">Note :- Online payment made by you is subject to credit in our bank and shall
+                    be treated as cancelled if not received in our bank.</p>
             </div>
         </div>
     </div>
@@ -1168,14 +1262,52 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        /* ---------- Back button ---------- */
-        document.getElementById('backBtn').addEventListener('click', function () {
-            if (window.history.length > 1) {
-                window.history.back();
-            } else {
-                window.location.href = 'dashboard.html';
+        /* ---------- Session filter + auto-calc paid total from visible rows ---------- */
+        (function () {
+            const select = document.getElementById('sessionSelect');
+            const tbody = document.getElementById('txnTableBody');
+            const allRows = Array.prototype.slice.call(tbody.querySelectorAll('tr[data-session]'));
+
+            const fmt = function (n) {
+                return '\u20B9' + n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            };
+
+            function applyFilter() {
+                const chosen = select.value;
+                let visibleCount = 0;
+                let paidTotal = 0;
+
+                allRows.forEach(function (row) {
+                    const matches = (chosen === 'all' || row.getAttribute('data-session') === chosen);
+                    row.style.display = matches ? '' : 'none';
+                    if (matches) {
+                        visibleCount++;
+                        const amountCell = row.children[2];
+                        const statusCell = row.children[3].textContent.trim().toLowerCase();
+                        const amount = parseFloat(amountCell.textContent.replace(/,/g, '')) || 0;
+                        if (statusCell === 'sucess' || statusCell === 'success') {
+                            paidTotal += amount;
+                        }
+                    }
+                });
+
+                // remove any previous "no rows" message, then add one if needed
+                const existingEmptyRow = tbody.querySelector('.no-rows-row');
+                if (existingEmptyRow) existingEmptyRow.remove();
+
+                if (visibleCount === 0) {
+                    const emptyRow = document.createElement('tr');
+                    emptyRow.className = 'no-rows-row';
+                    emptyRow.innerHTML = '<td colspan="4" class="no-rows">No transactions found for this session.</td>';
+                    tbody.appendChild(emptyRow);
+                }
+
+                document.getElementById('paidVal').textContent = fmt(paidTotal);
             }
-        });
+
+            select.addEventListener('change', applyFilter);
+            applyFilter();
+        })();
     </script>
 </body>
 

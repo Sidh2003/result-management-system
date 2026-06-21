@@ -614,6 +614,31 @@
             background: var(--red-600);
         }
 
+        .status-pill.pending {
+            color: var(--orange-500);
+        }
+
+        .status-pill.pending::before {
+            background: var(--orange-500);
+        }
+
+        .session-tag {
+            display: inline-block;
+            font-size: .76rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            background: var(--gray-100);
+            padding: 2px 9px;
+            border-radius: 20px;
+        }
+
+        .empty-row td {
+            text-align: center;
+            padding: 28px 18px;
+            color: var(--gray-500);
+            font-size: .92rem;
+        }
+
         .table-note {
             margin-top: 16px;
             font-size: .92rem;
@@ -903,7 +928,8 @@
                         <span class="nav-caret">&#9662;</span>
                     </button>
                     <div class="nav-sub">
-                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Apply Bus Facility
+                        <a href="bus-facility.html"><span class="chevron"
+                                style="color:#7e3fd1;">&raquo;&raquo;</span>Apply Bus Facility
                             Online*</a>
                         <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Fees Installment
                             Chart</a>
@@ -1148,6 +1174,8 @@
                 <!-- Summary totals -->
                 <div class="summary-row">
 
+
+
                     <div class="summary-card paid">
                         <span class="icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1156,7 +1184,7 @@
                         </span>
                         <div class="summary-text">
                             <div class="label">Amount Paid</div>
-                            <div class="value" id="paidVal">&#8377;38,000.00</div>
+                            <div class="value" id="paidVal">&#8377;0.00</div>
                         </div>
                     </div>
                     <div class="summary-card pending">
@@ -1168,7 +1196,7 @@
                         </span>
                         <div class="summary-text">
                             <div class="label">Pending Amount</div>
-                            <div class="value" id="pendingVal">&#8377;10,500.00</div>
+                            <div class="value" id="pendingVal">&#8377;0.00</div>
                         </div>
                     </div>
                 </div>
@@ -1178,8 +1206,9 @@
                     <label>Select Session:</label>
                     <div class="select-wrap">
                         <select id="sessionSelect">
-                            <option>2024-2025</option>
-                            <option>2025-2026</option>
+                            <option value="all" selected>All Sessions</option>
+                            <option value="2024-2025">2024-2025</option>
+                            <option value="2025-2026">2025-2026</option>
                         </select>
                     </div>
                 </div>
@@ -1189,25 +1218,15 @@
                     <table class="txn-table">
                         <thead>
                             <tr>
+                                <th>Session</th>
                                 <th>Transaction Date</th>
                                 <th>Payment Id</th>
                                 <th>Transaction Amount</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>12-Jul-2025</td>
-                                <td>88633920154321</td>
-                                <td>20000.00</td>
-                                <td><span class="status-pill success">Sucess</span></td>
-                            </tr>
-                            <tr>
-                                <td>21-Sep-2025</td>
-                                <td>88634015873209</td>
-                                <td>18000.00</td>
-                                <td><span class="status-pill success">Sucess</span></td>
-                            </tr>
+                        <tbody id="txnTableBody">
+                            <!-- rows injected by JS -->
                         </tbody>
                     </table>
                 </div>
@@ -1264,30 +1283,114 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        /* ---------- Auto-calc totals from table (only counts "Sucess" rows as paid) ---------- */
-        (function () {
-            const rows = document.querySelectorAll('.txn-table tbody tr');
-            let paidTotal = 0;
-            rows.forEach(function (row) {
-                const amountCell = row.children[2];
-                const statusCell = row.children[3].textContent.trim().toLowerCase();
-                const amount = parseFloat(amountCell.textContent.replace(/,/g, '')) || 0;
-                if (statusCell === 'sucess' || statusCell === 'success') {
-                    paidTotal += amount;
-                }
+        /* =====================================================
+           TRANSACTION DATA
+           Edit this array to add / change / remove any transaction.
+           session : "2024-2025" or "2025-2026"
+           status  : "success" | "failed" | "pending"
+        ===================================================== */
+        const transactions = [
+            // ---------- Session 2024-2025  (Total Paid: ₹48,500.00) ----------
+            {
+                session: "2024-2025",
+                date: "22-Jun-2024",
+                paymentId: "88631002214456",
+                amount: 20000.00,
+                status: "success"
+            },
+            {
+                session: "2024-2025",
+                date: "10-Sep-2024",
+                paymentId: "88631874453321",
+                amount: 20000.00,
+                status: "success"
+            },
+            {
+                session: "2024-2025",
+                date: "10-Jan-2025",
+                paymentId: "88632209987765",
+                amount: 8500.00,
+                status: "success"
+            },
+
+            // ---------- Session 2025-2026  (Paid: ₹38,000.00 | Pending: ₹10,500.00) ----------
+            {
+                session: "2025-2026",
+                date: "12-Jul-2025",
+                paymentId: "88633920154321",
+                amount: 20000.00,
+                status: "success"
+            },
+            {
+                session: "2025-2026",
+                date: "21-Sep-2025",
+                paymentId: "88634015873209",
+                amount: 18000.00,
+                status: "success"
+            },
+            {
+                session: "2025-2026",
+                date: "--",
+                paymentId: "--",
+                amount: 10500.00,
+                status: "pending"
+            }
+        ];
+
+        const fmt = function (n) {
+            return '\u20B9' + n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        };
+
+        function statusLabel(status) {
+            if (status === 'success') return { text: 'Success', cls: 'success' };
+            if (status === 'failed') return { text: 'Failed', cls: 'failed' };
+            return { text: 'Pending', cls: 'pending' };
+        }
+
+        function renderTable(filter) {
+            const tbody = document.getElementById('txnTableBody');
+            tbody.innerHTML = '';
+
+            const rows = transactions.filter(function (t) {
+                return filter === 'all' || t.session === filter;
             });
 
-            const totalFee = 48500.00; // overall fee for the session (paid 38,000 + pending 10,500)
-            const pending = Math.max(totalFee - paidTotal, 0);
+            if (rows.length === 0) {
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="5">No transactions found for this session.</td></tr>';
+            } else {
+                rows.forEach(function (t) {
+                    const st = statusLabel(t.status);
+                    const tr = document.createElement('tr');
+                    tr.innerHTML =
+                        '<td><span class="session-tag">' + t.session + '</span></td>' +
+                        '<td>' + t.date + '</td>' +
+                        '<td>' + t.paymentId + '</td>' +
+                        '<td>' + t.amount.toFixed(2) + '</td>' +
+                        '<td><span class="status-pill ' + st.cls + '">' + st.text + '</span></td>';
+                    tbody.appendChild(tr);
+                });
+            }
 
-            const fmt = function (n) {
-                return '\u20B9' + n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            };
+            // ---- Totals for the currently filtered rows ----
+            let paidTotal = 0;
+            let pendingTotal = 0;
+            rows.forEach(function (t) {
+                if (t.status === 'success') paidTotal += t.amount;
+                else if (t.status === 'pending') pendingTotal += t.amount;
+            });
+            const grandTotal = paidTotal + pendingTotal;
 
             document.getElementById('paidVal').textContent = fmt(paidTotal);
-            document.getElementById('pendingVal').textContent = fmt(pending);
-            document.getElementById('totalFeeVal').textContent = fmt(totalFee);
-        })();
+            document.getElementById('pendingVal').textContent = fmt(pendingTotal);
+            document.getElementById('totalFeeVal').textContent = fmt(grandTotal);
+        }
+
+        document.getElementById('sessionSelect').addEventListener('change', function (e) {
+            renderTable(e.target.value);
+        });
+
+        // Initial render shows ALL sessions
+        renderTable('all');
     </script>
 </body>
 
