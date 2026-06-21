@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SAM Global University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy-900: #0a1840;
+            --blue-500: #2563eb;
+            --blue-600: #1d4ed8;
+            --green-600: #1e9e57;
+            --teal-500: #1391b0;
+            --orange-500: #f4811f;
+            --purple-500: #7e3fd1;
+            --gray-50: #f6f7fa;
+            --gray-100: #eef0f6;
+            --gray-200: #e3e6ef;
+            --gray-300: #d4d8e3;
+            --gray-400: #9aa1b4;
+            --gray-500: #7c8499;
+            --gray-600: #5b6478;
+            --gray-700: #424a5e;
+            --gray-800: #2b3142;
+            --page-bg: #eceef3;
+            --white: #ffffff;
+            --pink-100: #fbd9de;
+            --pink-200: #f7c2cb;
+            --green-100: #c9ecd9;
+            --radius: 8px;
+            --radius-sm: 5px;
+            --shadow: 0 2px 10px rgba(20, 30, 60, .06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: var(--page-bg);
+            color: var(--gray-800);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        /* ---------- top accent bar ---------- */
+        .top-accent {
+            height: 6px;
+            background: var(--gray-700);
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 28px;
+            flex-wrap: wrap;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .accsoft-logo {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+            flex: none;
+        }
+
+        .uni-logo {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            flex: none;
+        }
+
+        .uni-name {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            white-space: nowrap;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .sem-info {
+            font-size: .92rem;
+            color: var(--gray-700);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .header-bell {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--gray-700);
+            cursor: pointer;
+        }
+
+        .header-bell svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .header-bell .caret {
+            font-size: .65rem;
+            color: var(--gray-400);
+        }
+
+        .header-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .header-profile .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex: none;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-profile .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-profile .name {
+            font-size: .95rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            white-space: nowrap;
+        }
+
+        .header-profile .caret {
+            font-size: .65rem;
+            color: var(--gray-400);
+        }
+
+        /* ---------- mobile sidebar toggle ---------- */
+        .sidebar-toggle {
+            display: none;
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-sm);
+            background: var(--gray-100);
+            align-items: center;
+            justify-content: center;
+            flex: none;
+        }
+
+        .sidebar-toggle svg {
+            width: 20px;
+            height: 20px;
+            color: var(--gray-700);
+        }
+
+        /* =====================================================
+           LAYOUT
+        ===================================================== */
+        .layout {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            max-width: 1620px;
+            margin: 0 auto;
+            padding: 20px 28px 60px;
+        }
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+        .sidebar {
+            width: 270px;
+            flex: none;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 6px 0 22px;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .nav-link {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 14px 22px;
+            font-size: .98rem;
+            font-weight: 500;
+            color: var(--gray-800);
+            text-align: left;
+        }
+
+        .nav-link:hover {
+            background: var(--gray-50);
+        }
+
+        .nav-link-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .nav-ico {
+            width: 22px;
+            height: 22px;
+            flex: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-ico svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .nav-caret {
+            font-size: .68rem;
+            color: var(--blue-500);
+            transition: transform .2s ease;
+            flex: none;
+        }
+
+        .nav-item.open .nav-caret {
+            transform: rotate(180deg);
+        }
+
+        .nav-sub {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--gray-50);
+            transition: max-height .3s ease;
+        }
+
+        .nav-item.open .nav-sub {
+            max-height: 1200px;
+        }
+
+        .nav-sub a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px 10px 28px;
+            font-size: .87rem;
+            color: var(--gray-600);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .nav-sub a:hover {
+            color: var(--blue-500);
+        }
+
+        .nav-sub a .chevron {
+            font-size: .75rem;
+            color: var(--blue-400, #6f9ef0);
+            flex: none;
+        }
+
+        .mentor-block {
+            text-align: center;
+            padding-top: 18px;
+        }
+
+        .mentor-block h4 {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--navy-900);
+            margin-bottom: 14px;
+        }
+
+        .mentor-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            margin: 0 auto;
+            overflow: hidden;
+            background: var(--green-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mentor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* =====================================================
+           MAIN CONTENT GRID
+        ===================================================== */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 20px;
+        }
+
+        .main-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 0;
+        }
+
+        .side-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 0;
+        }
+
+        /* ---------- shared card ---------- */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px 24px 22px;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: var(--blue-500);
+            margin-bottom: 4px;
+        }
+
+        .card-title.title-green {
+            color: var(--green-600);
+        }
+
+        .card-title svg {
+            width: 19px;
+            height: 19px;
+            flex: none;
+        }
+
+        /* ---------- Quick Links ---------- */
+        .quick-links-row {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .quick-link-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .quick-link-item a {
+            font-size: .95rem;
+            color: var(--gray-500);
+        }
+
+        .quick-link-item a:hover {
+            color: var(--blue-500);
+        }
+
+        .quick-link-divider {
+            width: 2px;
+            height: 18px;
+            background: var(--green-600);
+        }
+
+        /* ---------- Today's Time Table ---------- */
+        .timetable-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .field-block label {
+            display: block;
+            font-size: .95rem;
+            color: var(--gray-700);
+            margin-bottom: 9px;
+        }
+
+        .select-wrap {
+            position: relative;
+        }
+
+        .select-wrap select {
+            width: 100%;
+            font-family: inherit;
+            font-size: .92rem;
+            color: var(--gray-700);
+            padding: 11px 38px 11px 14px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .select-wrap::after {
+            content: "";
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            width: 9px;
+            height: 9px;
+            border-right: 2px solid var(--gray-600);
+            border-bottom: 2px solid var(--gray-600);
+            transform: translateY(-65%) rotate(45deg);
+            pointer-events: none;
+        }
+
+        .timetable-empty {
+            margin-top: 18px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-size: .92rem;
+            color: var(--gray-700);
+        }
+
+        /* ---------- News/Notices ---------- */
+        .news-card .card-title {
+            margin-bottom: 0;
+        }
+
+        .news-view-all {
+            text-align: right;
+            margin-top: 38px;
+        }
+
+        .news-view-all a {
+            font-size: .88rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .news-view-all a:hover {
+            color: var(--blue-500);
+        }
+
+        /* ---------- Holiday Chart calendar ---------- */
+        .cal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 12px 0 14px;
+        }
+
+        .cal-nav {
+            color: var(--gray-400);
+            font-size: 1.1rem;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .cal-nav:hover {
+            background: var(--gray-100);
+        }
+
+        .cal-month {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .cal-dow {
+            text-align: center;
+            font-size: .78rem;
+            color: var(--gray-500);
+            font-weight: 500;
+            padding-bottom: 6px;
+        }
+
+        .cal-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: .85rem;
+            color: var(--gray-700);
+            background: transparent;
+        }
+
+        .cal-day.muted {
+            background: var(--gray-100);
+            color: var(--gray-400);
+        }
+
+        .cal-day.weekday {
+            background: var(--green-100);
+            color: var(--gray-700);
+        }
+
+        .cal-day.weekend {
+            background: var(--pink-200);
+            color: var(--gray-700);
+        }
+
+        /* =====================================================
+           FLOATING ELEMENTS
+        ===================================================== */
+        .start-tooltip {
+            position: fixed;
+            bottom: 26px;
+            left: 28px;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+            border-radius: 4px;
+            padding: 8px 18px;
+            font-size: .88rem;
+            color: var(--gray-700);
+            z-index: 90;
+        }
+
+        .scroll-top-fab {
+            position: fixed;
+            bottom: 26px;
+            right: 28px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--navy-900);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 18px rgba(10, 20, 60, .3);
+            z-index: 90;
+        }
+
+        .scroll-top-fab svg {
+            width: 20px;
+            height: 20px;
+            color: #fff;
+        }
+
+        /* =====================================================
+           MOBILE SIDEBAR DRAWER BEHAVIOR
+        ===================================================== */
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 20, 60, .45);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .25s ease, visibility .25s;
+            z-index: 150;
+        }
+
+        .sidebar-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+        @media (max-width: 1100px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .side-col {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .sidebar-toggle {
+                display: flex;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 280px;
+                max-width: 84vw;
+                z-index: 200;
+                border-radius: 0;
+                overflow-y: auto;
+                transform: translateX(-100%);
+                transition: transform .3s ease;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .layout {
+                padding: 16px 16px 50px;
+            }
+
+            .header-inner {
+                padding: 12px 16px;
+            }
+
+            .uni-name {
+                font-size: 1.02rem;
+            }
+
+            .sem-info {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-right {
+                gap: 14px;
+            }
+
+            .header-profile .name {
+                display: none;
+            }
+
+            .uni-logo {
+                height: 34px;
+            }
+
+            .accsoft-logo {
+                height: 26px;
+            }
+
+            .uni-name {
+                font-size: .92rem;
+            }
+
+            .timetable-fields {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .card {
+                padding: 16px 16px 18px;
+            }
+
+            .cal-day {
+                font-size: .76rem;
+            }
+
+            .cal-dow {
+                font-size: .68rem;
+            }
+
+            .start-tooltip {
+                left: 16px;
+                bottom: 16px;
+                font-size: .8rem;
+                padding: 7px 14px;
+            }
+
+            .scroll-top-fab {
+                right: 16px;
+                bottom: 16px;
+                width: 42px;
+                height: 42px;
+            }
+
+            .quick-links-row {
+                gap: 12px;
+            }
+
+            .quick-link-item {
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .header-bell span.bell-label {
+                display: none;
+            }
+
+            .mentor-avatar {
+                width: 54px;
+                height: 54px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-accent"></div>
+
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Open menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M3 12h18M3 18h18" />
+                    </svg>
+                </button>
+                <img src="assets/acc-logo.jpg" alt="AccSoft" class="accsoft-logo">
+                <img src="assets/icon.png" alt="SAM Global University logo" class="uni-logo">
+                <span class="uni-name">SAM Global University</span>
+            </div>
+
+            <div class="header-right">
+                <span class="sem-info">BBA IV SEM, Section - A</span>
+                <div class="header-bell">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                    <span class="caret">&#9662;</span>
+                </div>
+                <div class="header-profile">
+                    <span class="avatar"><img src="assets/student.jpg" alt="Choudhari Nitesh Santosh"></span>
+                    <span class="name">CHOUDHARI NITESH SANTOSH</span>
+                    <span class="caret">&#9662;</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="layout">
+
+        <!-- ============ SIDEBAR ============ -->
+        <aside class="sidebar" id="sidebar">
+            <ul class="nav-list">
+                <!-- ACADEMIC -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb"
+                                    stroke-width="2">
+                                    <path d="M22 10 12 5 2 10l10 5 10-5z" />
+                                    <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+                                </svg></span>
+                            Academic
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="#"><span class="chevron">&raquo;</span>Assessment Marks</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Assessment Submission</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Assignments</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Assignments (CBCS)</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Attendance Status</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Attendance Subjwise</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Course Outline</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Current Backlog</a>
+                        <a href="result.html" style="padding-left:46px;"><span class="chevron">&raquo;</span>Exam
+                            Result</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Leave Application</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Mentoring Questions</a>
+                        <a href="#"><span class="chevron">&raquo;</span>My Grades Till Date</a>
+                        <a href=""><span class="chevron">&raquo;</span>Online Class Recording</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Online Test</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Online Test Portal</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Plagiarism Check</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Print Exam Form</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Special Leave Request</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Student Progress Entry</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Subject Choice Filling</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Time Table</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Zoom Online Class</a>
+                        <a href="#"><span class="chevron">&raquo;</span>Exam Schedule</a>
+                    </div>
+                </li>
+
+                <!-- ACADEMICS -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1e9e57"
+                                    stroke-width="2">
+                                    <path d="M22 10 12 5 2 10l10 5 10-5z" />
+                                    <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+                                </svg></span>
+                            Academics
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="result.html"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Academic
+                            Result /
+                            Document</a>
+                        <a href="#"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Online Class
+                            Assignment</a>
+                        <a href="#"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Online Test
+                            Portal</a>
+                        <a href="#"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Zoom Online
+                            Class</a>
+                    </div>
+                </li>
+
+                <!-- FEES -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#7e3fd1"
+                                    stroke-width="2">
+                                    <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg></span>
+                            Fees
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Apply Bus Facility
+                            Online*</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Fees Installment
+                            Chart</a>
+                        <a href="payment.html"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Online
+                            Fee
+                            Transaction Detail</a>
+                        <a href="payment.html"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Other
+                            Fee
+                            Print</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Other Ledger</a>
+                        <a href="#0"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Pay Fee
+                            Bus/Mess/Hostel</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Pay Fee Online</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Pay Other Fee</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Student Ledger</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Verify
+                            Transactions</a>
+                    </div>
+                </li>
+
+                <!-- GENERAL INFO -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#f4811f"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="9" />
+                                    <path d="M12 7v5l3 3" />
+                                </svg></span>
+                            General Info.
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>Notices</a>
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>Academic
+                            Calendar</a>
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>Holiday List</a>
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>University Rules
+                            &amp; Regulations</a>
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>Contact
+                            Directory</a>
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>Feedback Form</a>
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>Grievance
+                            Redressal</a>
+                    </div>
+                </li>
+
+                <!-- PLACEMENTS -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb"
+                                    stroke-width="2">
+                                    <circle cx="9" cy="8" r="3" />
+                                    <circle cx="17" cy="6" r="2" />
+                                    <path d="M3 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1" />
+                                </svg></span>
+                            Placements
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>Our Recruiters</a>
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>Placement Cell</a>
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>Internship
+                            Listings</a>
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>Resume Builder</a>
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>Placement Drive
+                            Schedule</a>
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>Offer Letters</a>
+                    </div>
+                </li>
+
+                <!-- HOSTEL -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1391b0"
+                                    stroke-width="2">
+                                    <path d="M3 9.5 12 3l9 6.5V21H3z" />
+                                    <path d="M9 21v-7h6v7" />
+                                </svg></span>
+                            Hostel
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="#"><span class="chevron" style="color:#1391b0;">&raquo;&raquo;</span>Room Allotment</a>
+                        <a href="#"><span class="chevron" style="color:#1391b0;">&raquo;&raquo;</span>Hostel Fee</a>
+                        <a href="#"><span class="chevron" style="color:#1391b0;">&raquo;&raquo;</span>Mess Menu</a>
+                        <a href="#"><span class="chevron" style="color:#1391b0;">&raquo;&raquo;</span>Leave/Outpass
+                            Request</a>
+                        <a href="#"><span class="chevron" style="color:#1391b0;">&raquo;&raquo;</span>Hostel Rules</a>
+                        <a href="#"><span class="chevron" style="color:#1391b0;">&raquo;&raquo;</span>Maintenance
+                            Complaint</a>
+                    </div>
+                </li>
+
+                <!-- TRANSPORTATION -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#7e3fd1"
+                                    stroke-width="2">
+                                    <rect x="2" y="9" width="20" height="9" rx="2" />
+                                    <path d="M5 9V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v2" />
+                                    <circle cx="7" cy="18" r="1.5" />
+                                    <circle cx="17" cy="18" r="1.5" />
+                                </svg></span>
+                            Transportation
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Bus Routes</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Track Bus</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Bus Pass
+                            Application</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Bus Fee
+                            Receipt</a>
+                    </div>
+                </li>
+
+                <!-- LIBRARY -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#f4811f"
+                                    stroke-width="2">
+                                    <path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14" />
+                                    <path d="M4 19a2 2 0 0 0 2 2h14M4 19a2 2 0 0 1 2-2h14" />
+                                </svg></span>
+                            Library
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>Issued Books</a>
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>Search
+                            Catalogue</a>
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>Renew/Reserve
+                            Book</a>
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>Fine Details</a>
+                        <a href="#"><span class="chevron" style="color:#f4811f;">&raquo;&raquo;</span>E-Library /
+                            Digital Resources</a>
+                    </div>
+                </li>
+
+                <!-- NON ACADEMIC -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="9" />
+                                    <path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z" />
+                                </svg></span>
+                            Non Academic
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>Clubs &amp;
+                            Societies</a>
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>Sports</a>
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>Cultural
+                            Events</a>
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>NSS / NCC</a>
+                        <a href="#"><span class="chevron" style="color:#2563eb;">&raquo;&raquo;</span>Annual Fest</a>
+                    </div>
+                </li>
+
+                <!-- ENRICHMENT -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1e9e57"
+                                    stroke-width="2">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                                </svg></span>
+                            Enrichment
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="#"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Certifications</a>
+                        <a href="#"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Workshops</a>
+                        <a href="#"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Guest Lectures</a>
+                        <a href="#"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>Skill Development
+                            Programs</a>
+                        <a href="#"><span class="chevron" style="color:#1e9e57;">&raquo;&raquo;</span>MOOC Courses</a>
+                    </div>
+                </li>
+
+                <!-- COMMUNICATION -->
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <span class="nav-link-left">
+                            <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#7e3fd1"
+                                    stroke-width="2">
+                                    <path d="M4 4h13l3 3v13H4z" />
+                                    <path d="M8 9h9M8 13h9M8 17h5" />
+                                </svg></span>
+                            Communication
+                        </span>
+                        <span class="nav-caret">&#9662;</span>
+                    </button>
+                    <div class="nav-sub">
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Messages</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Email</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>SMS Alerts</a>
+                        <a href="#"><span class="chevron" style="color:#7e3fd1;">&raquo;&raquo;</span>Circulars</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="mentor-block">
+                <h4>Your Mentor</h4>
+                <div class="mentor-avatar">
+                    <img src="assets/user.png" alt="Mentor">
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============ MAIN CONTENT ============ -->
+        <div class="main-content">
+            <div class="main-col">
+
+                <!-- Quick Links -->
+                <div class="card">
+                    <div class="card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m3 11 9-8 9 8" />
+                            <path d="M5 10v10h14V10" />
+                        </svg>
+                        Quick Links
+                    </div>
+                    <div class="quick-links-row">
+                        <div class="quick-link-item">
+                            <a href="#">Exam Form For Atkt/Supply</a>
+                        </div>
+                        <div class="quick-link-divider"></div>
+                        <div class="quick-link-item">
+                            <a href="result.html">Result</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Time Table -->
+                <div class="card">
+                    <div class="card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z" />
+                            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                        </svg>
+                        Today's Time Table
+                    </div>
+
+                    <div class="timetable-fields">
+                        <div class="field-block">
+                            <label>Session</label>
+                            <div class="select-wrap">
+                                <select>
+                                    <option>2025-2026</option>
+                                    <option>2024-2025</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field-block">
+                            <label>Academic Session</label>
+                            <div class="select-wrap">
+                                <select>
+                                    <option>JAN-JUN 26 (SGU)</option>
+                                    <option>JUL-DEC 25 (SGU)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timetable-empty">Time Table not found for today.</div>
+                </div>
+            </div>
+
+            <div class="side-col">
+
+                <!-- News/Notices -->
+                <div class="card news-card">
+                    <div class="card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 11v3a1 1 0 0 0 1 1h2l4 4V6L6 10H4a1 1 0 0 0-1 1z" />
+                            <path d="M15 8a4 4 0 0 1 0 8" />
+                        </svg>
+                        News/Notices
+                    </div>
+                    <div class="news-view-all">
+                        <a href="#">View All</a>
+                    </div>
+                </div>
+
+                <!-- Holiday Chart -->
+                <div class="card">
+                    <div class="card-title title-green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 10 12 5 2 10l10 5 10-5z" />
+                            <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+                        </svg>
+                        Holiday Chart
+                    </div>
+
+                    <div class="cal-head">
+                        <span class="cal-nav">&#8249;</span>
+                        <span class="cal-month">June 2026</span>
+                        <span class="cal-nav">&#8250;</span>
+                    </div>
+
+                    <div class="cal-grid">
+                        <span class="cal-dow">Sun</span>
+                        <span class="cal-dow">Mon</span>
+                        <span class="cal-dow">Tue</span>
+                        <span class="cal-dow">Wed</span>
+                        <span class="cal-dow">Thu</span>
+                        <span class="cal-dow">Fri</span>
+                        <span class="cal-dow">Sat</span>
+
+                        <span class="cal-day muted">31</span>
+                        <span class="cal-day weekday">1</span>
+                        <span class="cal-day weekday">2</span>
+                        <span class="cal-day weekday">3</span>
+                        <span class="cal-day weekday">4</span>
+                        <span class="cal-day weekday">5</span>
+                        <span class="cal-day weekday">6</span>
+
+                        <span class="cal-day weekend">7</span>
+                        <span class="cal-day weekday">8</span>
+                        <span class="cal-day weekday">9</span>
+                        <span class="cal-day weekday">10</span>
+                        <span class="cal-day weekday">11</span>
+                        <span class="cal-day weekday">12</span>
+                        <span class="cal-day weekday">13</span>
+
+                        <span class="cal-day weekend">14</span>
+                        <span class="cal-day weekday">15</span>
+                        <span class="cal-day weekday">16</span>
+                        <span class="cal-day weekday">17</span>
+                        <span class="cal-day weekday">18</span>
+                        <span class="cal-day weekday">19</span>
+                        <span class="cal-day weekday">20</span>
+
+                        <span class="cal-day weekend">21</span>
+                        <span class="cal-day weekday">22</span>
+                        <span class="cal-day weekday">23</span>
+                        <span class="cal-day weekday">24</span>
+                        <span class="cal-day weekday">25</span>
+                        <span class="cal-day weekday">26</span>
+                        <span class="cal-day weekday">27</span>
+
+                        <span class="cal-day weekend">28</span>
+                        <span class="cal-day weekday">29</span>
+                        <span class="cal-day weekday">30</span>
+                        <span class="cal-day muted">1</span>
+                        <span class="cal-day muted">2</span>
+                        <span class="cal-day muted">3</span>
+                        <span class="cal-day muted">4</span>
+
+                        <span class="cal-day muted">5</span>
+                        <span class="cal-day muted">6</span>
+                        <span class="cal-day muted">7</span>
+                        <span class="cal-day muted">8</span>
+                        <span class="cal-day muted">9</span>
+                        <span class="cal-day muted">10</span>
+                        <span class="cal-day muted">11</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ FLOATING ELEMENTS ============ -->
+    <div class="start-tooltip">Start</div>
+    <button class="scroll-top-fab" id="scrollTopBtn" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7" />
+        </svg>
+    </button>
+
+    <script>
+        /* ---------- Sidebar accordion ---------- */
+        document.querySelectorAll('.nav-item > .nav-link').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const item = btn.parentElement;
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.nav-item.open').forEach(function (el) {
+                    el.classList.remove('open');
+                });
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        /* ---------- Mobile sidebar drawer ---------- */
+        (function () {
+            const toggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            function openSidebar() {
+                sidebar.classList.add('open');
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            toggle.addEventListener('click', openSidebar);
+            overlay.addEventListener('click', closeSidebar);
+        })();
+
+        /* ---------- Scroll to top ---------- */
+        document.getElementById('scrollTopBtn').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+
+</html>

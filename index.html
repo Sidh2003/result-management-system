@@ -1,0 +1,2579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM Global University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy-900: #0a1840;
+            --navy-800: #0e2266;
+            --navy-700: #15308c;
+            --navy-600: #1a3aa3;
+            --orange-500: #f4811f;
+            --orange-600: #e06e0f;
+            --gray-50: #f6f7fa;
+            --gray-100: #eef0f6;
+            --gray-200: #e3e6ef;
+            --gray-400: #9aa1b4;
+            --gray-600: #5b6478;
+            --gray-800: #2b3142;
+            --white: #ffffff;
+            --radius-sm: 6px;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --shadow: 0 14px 34px rgba(10, 20, 60, .10);
+            --maxw: 1280px;
+            font-size: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            color: var(--gray-800);
+            background: var(--white);
+            line-height: 1.55;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: 'Poppins', Arial, sans-serif;
+            color: var(--navy-800);
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .container {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- Image placeholder box ----------
+           .img-box keeps the dashed fallback pattern visible
+           behind the <img>. Once you set a real src on the
+           <img>, it will cover the dashed pattern automatically
+           because the <img> is positioned to fill the box. */
+        .img-box {
+            position: relative;
+            width: 100%;
+            background:
+                repeating-linear-gradient(45deg, #e7eaf3, #e7eaf3 10px, #eef0f7 10px, #eef0f7 20px);
+            border: 1.5px dashed var(--gray-400);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-size: .78rem;
+            font-weight: 600;
+            letter-spacing: .04em;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .img-box img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .img-box span {
+            position: relative;
+            z-index: 1;
+            padding: 8px;
+            pointer-events: none;
+        }
+
+        /* ---------- Eyebrow / section heads ---------- */
+        .eyebrow {
+            color: var(--orange-500);
+            font-weight: 700;
+            letter-spacing: .14em;
+            font-size: .75rem;
+            text-transform: uppercase;
+        }
+
+        .section-head {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 46px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-head p {
+            color: var(--gray-600);
+            font-size: .98rem;
+        }
+
+        /* =====================================================
+     TOP UTILITY BAR
+  ===================================================== */
+        .topbar {
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+            font-size: .78rem;
+            color: var(--gray-600);
+        }
+
+        .topbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-top: 9px;
+            padding-bottom: 9px;
+        }
+
+        .topbar-stats {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .02em;
+        }
+
+        .topbar-stats .stat b {
+            color: var(--orange-500);
+            font-size: .92rem;
+            margin-right: 4px;
+        }
+
+        .topbar-stats .sep {
+            color: var(--orange-500);
+            font-size: .6rem;
+        }
+
+        .topbar-cta {
+            background: var(--orange-500);
+            color: #fff;
+            font-weight: 700;
+            font-size: .8rem;
+            padding: 11px 22px;
+            text-transform: uppercase;
+            letter-spacing: .03em;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .topbar-cta:hover {
+            background: var(--orange-600);
+        }
+
+        /* =====================================================
+     DROPDOWN MENUS (shared by contact bar + main nav)
+  ===================================================== */
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item>.nav-trigger {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: none;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .caret {
+            font-size: .6rem;
+            opacity: .8;
+            transition: transform .2s;
+        }
+
+        .nav-item:hover .caret {
+            transform: translateY(1px);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 14px);
+            left: 0;
+            background: #fff;
+            min-width: 250px;
+            box-shadow: 0 18px 40px rgba(10, 20, 60, .20);
+            border-radius: 8px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: opacity .2s ease, transform .2s ease, visibility .2s;
+            z-index: 90;
+        }
+
+        .nav-item:hover .dropdown-menu,
+        .nav-item:focus-within .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 24px;
+            font-size: .85rem;
+            font-weight: 500;
+            color: var(--gray-800);
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover {
+            color: var(--orange-500);
+            background: var(--gray-50);
+        }
+
+        .dropdown-menu a.hi {
+            color: var(--orange-500);
+        }
+
+        /* ---------- Contact / quicklinks bar ---------- */
+        .contactbar {
+            background: var(--navy-700);
+            color: #dbe2f7;
+            font-size: .82rem;
+            position: relative;
+            z-index: 55;
+        }
+
+        .contactbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 11px;
+            padding-bottom: 11px;
+        }
+
+        .contactbar-left {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+            font-weight: 500;
+        }
+
+        .contactbar-left a {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #fff;
+        }
+
+        .contactbar-left svg {
+            width: 15px;
+            height: 15px;
+            flex: none;
+        }
+
+        .contactbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .contactbar-nav .nav-trigger {
+            color: #fff;
+            font-weight: 500;
+            opacity: .92;
+        }
+
+        .contactbar-nav a:not(.dropdown-menu a) {
+            font-weight: 500;
+            opacity: .92;
+        }
+
+        .contactbar-nav .nav-item:hover>.nav-trigger,
+        .contactbar-nav .nav-item:hover>a {
+            opacity: 1;
+            color: var(--orange-500);
+        }
+
+        /* =====================================================
+     MAIN HEADER / NAV
+  ===================================================== */
+        .mainheader {
+            background: #fff;
+            border-bottom: 1px solid var(--gray-200);
+            position: relative;
+            z-index: 50;
+        }
+
+        .mainheader .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-logo {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-main {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .nav-main .nav-trigger,
+        .nav-main>.nav-item>a {
+            font-size: .86rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+            padding: 8px 0;
+        }
+
+        .nav-main .nav-item:hover>.nav-trigger,
+        .nav-main .nav-item:hover>a {
+            color: var(--orange-500);
+        }
+
+        .header-tools {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-btn svg {
+            width: 17px;
+            height: 17px;
+            color: var(--navy-800);
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            width: 30px;
+            cursor: pointer;
+        }
+
+        .burger span {
+            height: 3px;
+            background: var(--navy-800);
+            border-radius: 2px;
+        }
+
+        /* =====================================================
+     HERO IMAGE SLIDER
+  ===================================================== */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            overflow: hidden;
+            background: var(--navy-900);
+        }
+
+        .hero-slider .slides {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slider .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity .9s ease;
+        }
+
+        .hero-slider .slide.active {
+            opacity: 1;
+        }
+
+        .hero-slider .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Hero slides fall back to the dashed pattern + navy
+           background (set on .hero-slider) until a real src
+           is added, so the slider never looks "broken" empty. */
+        .hero-slider .slide .img-box {
+            position: absolute;
+            inset: 0;
+            border-radius: 0;
+            border: none;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .85);
+            color: var(--navy-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            z-index: 5;
+            transition: background .2s;
+        }
+
+        .slider-arrow:hover {
+            background: #fff;
+        }
+
+        .slider-arrow.prev {
+            left: 18px;
+        }
+
+        .slider-arrow.next {
+            right: 18px;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 18px;
+            left: 0;
+            right: 0;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            gap: 9px;
+        }
+
+        .slider-dots .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .5);
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .slider-dots .dot.active {
+            background: #fff;
+            width: 24px;
+            border-radius: 6px;
+        }
+
+        /* =====================================================
+     STATS STRIP
+  ===================================================== */
+        .stats {
+            background: #fff;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .stats .container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            padding: 30px 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            padding: 0 10px;
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 10%;
+            height: 80%;
+            width: 1px;
+            background: var(--gray-200);
+        }
+
+        .stat-ico {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: none;
+        }
+
+        .stat-ico svg {
+            width: 20px;
+            height: 20px;
+            color: var(--orange-500);
+        }
+
+        .stat-item .num {
+            font-family: 'Poppins';
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--navy-800);
+        }
+
+        .stat-item .lbl {
+            font-size: .74rem;
+            color: var(--gray-600);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .03em;
+        }
+
+        /* =====================================================
+     WHY CHOOSE SGU
+  ===================================================== */
+        .why {
+            padding: 80px 0 0;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .why-grid .img-box {
+            aspect-ratio: auto;
+            min-height: 440px;
+            border-radius: 0;
+            border: none;
+        }
+
+        .why-panel {
+            background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+            color: #fff;
+            padding: 56px 56px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .why-panel h2 {
+            color: #fff;
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            margin-bottom: 20px;
+        }
+
+        .why-panel p {
+            color: #cfd8f2;
+            font-size: .95rem;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: .85rem;
+            padding: 13px 26px;
+            border-radius: 30px;
+            width: fit-content;
+        }
+
+        .btn-light {
+            background: #fff;
+            color: var(--navy-800);
+            margin-top: 10px;
+        }
+
+        .btn-light:hover {
+            background: var(--gray-100);
+        }
+
+        .btn-navy {
+            background: var(--navy-800);
+            color: #fff;
+        }
+
+        .btn-navy:hover {
+            background: var(--navy-700);
+        }
+
+        .why-thumbs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .why-thumbs .img-box {
+            aspect-ratio: 4/3.1;
+            border-radius: 0;
+            border: none;
+            border-right: 2px solid #fff;
+        }
+
+        .why-thumbs .img-box:last-child {
+            border-right: none;
+        }
+
+        /* =====================================================
+     WHAT MAKES US SPECIAL
+  ===================================================== */
+        .special {
+            padding: 90px 0;
+            background: #fff;
+        }
+
+        .special-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .special-item {
+            padding: 36px 28px;
+            text-align: center;
+            border-bottom: 1px solid var(--gray-200);
+            border-right: 1px solid var(--gray-200);
+        }
+
+        .special-grid .special-item:nth-child(4n) {
+            border-right: none;
+        }
+
+        .sp-ico {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+        }
+
+        .sp-ico svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .special-item h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .special-item p {
+            font-size: .83rem;
+            color: var(--gray-600);
+        }
+
+        .c-green {
+            background: #e3f6ea;
+            color: #1e9e57;
+        }
+
+        .c-teal {
+            background: #e1f4f8;
+            color: #1391b0;
+        }
+
+        .c-blue {
+            background: #e4ecfc;
+            color: #2f5fdb;
+        }
+
+        .c-purple {
+            background: #efe6fb;
+            color: #7e3fd1;
+        }
+
+        /* =====================================================
+     COURSES WE OFFER
+  ===================================================== */
+        .courses {
+            background: var(--navy-800);
+            padding: 90px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .courses::before {
+            content: "";
+            position: absolute;
+            left: -120px;
+            top: -120px;
+            width: 340px;
+            height: 340px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, 0));
+            transform: rotate(20deg);
+            border-radius: 40px;
+        }
+
+        .courses-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+            flex-wrap: wrap;
+        }
+
+        .courses-head h2 {
+            color: #fff;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            max-width: 380px;
+        }
+
+        .courses-head p {
+            color: #aab6dd;
+            font-size: .88rem;
+            max-width: 380px;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .course-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            min-height: 170px;
+            background: linear-gradient(160deg, var(--navy-700), var(--navy-600));
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .course-card .img-box {
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius);
+            border: none;
+            opacity: .28;
+            z-index: 0;
+        }
+
+        .course-card .ctext {
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-card h3 {
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .course-card .more {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            font-weight: 700;
+            font-size: .8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .course-card.feature {
+            background: linear-gradient(160deg, var(--orange-500), var(--orange-600));
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-list .fl-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            font-weight: 700;
+            font-size: .92rem;
+        }
+
+        .feature-list svg {
+            width: 20px;
+            height: 20px;
+            flex: none;
+        }
+
+        /* =====================================================
+     AI MODULES
+  ===================================================== */
+        .aimod {
+            background: radial-gradient(ellipse at top, var(--navy-700) 0%, var(--navy-900) 70%);
+            padding: 90px 0;
+        }
+
+        .aimod .section-head h2 {
+            color: #fff;
+        }
+
+        .aimod .section-head h2 .hi {
+            color: var(--orange-500);
+        }
+
+        .aimod .section-head p {
+            color: #9fb0dd;
+        }
+
+        .aimod-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .ai-card {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: var(--radius);
+            padding: 28px 26px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .2s, background .2s;
+        }
+
+        .ai-card:hover {
+            border-color: var(--orange-500);
+            background: rgba(255, 255, 255, .06);
+        }
+
+        .ai-card .num {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            font-family: 'Poppins';
+            font-weight: 800;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, .08);
+        }
+
+        .ai-card h3 {
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: .03em;
+        }
+
+        .ai-card .role {
+            color: var(--orange-500);
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin: 6px 0 14px;
+        }
+
+        .ai-card .rule {
+            width: 30px;
+            height: 2px;
+            background: rgba(255, 255, 255, .2);
+            margin-bottom: 14px;
+        }
+
+        .ai-card p {
+            color: #aab6dd;
+            font-size: .85rem;
+        }
+
+        /* =====================================================
+     MOU + RECRUITERS
+  ===================================================== */
+        .mou {
+            padding: 90px 0 0;
+        }
+
+        .mou .section-head {
+            margin-bottom: 50px;
+        }
+
+        .mou-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 0;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        .mou-grid .img-box {
+            aspect-ratio: 16/10;
+            border-radius: var(--radius) 0 0 var(--radius);
+            min-height: 300px;
+        }
+
+        .mou-card {
+            background: #fff;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            box-shadow: var(--shadow);
+            padding: 40px 44px;
+            margin-left: -30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mou-card p {
+            color: var(--gray-600);
+            font-size: .92rem;
+            margin-bottom: 22px;
+        }
+
+        .recruiters {
+            background: var(--orange-500);
+            padding: 46px 0;
+            margin-top: 60px;
+        }
+
+        .recruiters-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .recruiters-top h3 {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 800;
+            max-width: 320px;
+        }
+
+        .recruiters-top p {
+            color: #fff0e0;
+            font-size: .85rem;
+            max-width: 380px;
+        }
+
+        .logo-row {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 14px;
+        }
+
+        .logo-box {
+            background: #fff;
+            border-radius: 8px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 10px;
+        }
+
+        .logo-box .img-box {
+            border: none;
+            background: transparent;
+            height: 100%;
+            width: 100%;
+            color: var(--gray-400);
+            font-size: .6rem;
+        }
+
+        .logo-box .img-box img {
+            object-fit: contain;
+        }
+
+        .logo-box span.fallback {
+            font-weight: 800;
+            color: var(--navy-700);
+            font-size: .78rem;
+            text-align: center;
+            letter-spacing: .02em;
+        }
+
+        /* =====================================================
+     FOOTER
+  ===================================================== */
+        .footer {
+            position: relative;
+            background: var(--navy-900);
+            color: #c7cfe6;
+            padding: 80px 0 0;
+            overflow: hidden;
+        }
+
+        .footer-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: .18;
+        }
+
+        .footer-bg .img-box {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0;
+        }
+
+        .footer-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10, 24, 64, .85), rgba(10, 24, 64, .97));
+            z-index: 0;
+        }
+
+        .footer .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            padding-bottom: 50px;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-size: 1.02rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 13px;
+            font-size: .86rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--orange-500);
+        }
+
+        .footer-col address {
+            font-style: normal;
+            font-size: .86rem;
+        }
+
+        .footer-col .addr-strong {
+            color: #fff;
+            font-weight: 600;
+            display: block;
+            margin: 4px 0 14px;
+        }
+
+        .footer-col .sub-label {
+            font-size: .78rem;
+            color: #8d99c2;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            padding: 22px 0;
+            font-size: .8rem;
+            color: #8d99c2;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .footer-bottom a {
+            color: var(--orange-500);
+            font-weight: 600;
+        }
+
+        /* =====================================================
+     FLOATING ELEMENTS
+  ===================================================== */
+        .side-tabs {
+            position: fixed;
+            top: 30%;
+            right: 0;
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .side-tabs a {
+            background: var(--navy-800);
+            color: #fff;
+            border: 1.5px solid var(--orange-500);
+            border-right: none;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding: 14px 8px;
+            font-size: .74rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            border-radius: 6px 0 0 6px;
+        }
+
+        .float-actions {
+            position: fixed;
+            bottom: 22px;
+            left: 0;
+            right: 0;
+            z-index: 60;
+            pointer-events: none;
+        }
+
+        .float-actions .container {
+            position: relative;
+            padding: 0 24px;
+        }
+
+        .fab {
+            pointer-events: auto;
+            position: absolute;
+            bottom: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .fab svg {
+            width: 24px;
+            height: 24px;
+            color: #fff;
+        }
+
+        .fab-call {
+            left: 24px;
+            background: #22c55e;
+        }
+
+        .fab-wa {
+            right: 24px;
+            background: #22c55e;
+        }
+
+        .fab-top {
+            right: 24px;
+            bottom: 64px;
+            background: var(--navy-800);
+            width: 40px;
+            height: 40px;
+        }
+
+        .fab-top svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* =====================================================
+     MOBILE SLIDE-IN DRAWER MENU
+     (set to slide from the RIGHT — to slide from the LEFT instead,
+      swap "right:0" -> "left:0" and the translateX(100%) -> translateX(-100%)
+      on .mobile-drawer / .mobile-drawer.open below)
+  ===================================================== */
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 16, 40, .55);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s ease;
+            z-index: 150;
+        }
+
+        .drawer-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 330px;
+            max-width: 86vw;
+            background: #fff;
+            z-index: 200;
+            overflow-y: auto;
+            box-shadow: -12px 0 36px rgba(0, 0, 0, .18);
+            transform: translateX(100%);
+            transition: transform .35s ease;
+        }
+
+        .mobile-drawer.open {
+            transform: translateX(0);
+        }
+
+        .drawer-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 2;
+        }
+
+        .drawer-logo {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .drawer-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--navy-800);
+            line-height: 1;
+        }
+
+        .drawer-nav {
+            padding: 6px 0;
+        }
+
+        .drawer-item {
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .drawer-link {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 22px;
+            font-weight: 600;
+            font-size: .92rem;
+            color: var(--gray-800);
+            text-align: left;
+        }
+
+        a.drawer-link {
+            display: block;
+        }
+
+        .drawer-item.has-sub>.drawer-link .d-caret {
+            transition: transform .25s ease;
+            font-size: .7rem;
+            color: var(--gray-400);
+        }
+
+        .drawer-item.has-sub.open>.drawer-link .d-caret {
+            transform: rotate(180deg);
+            color: var(--orange-500);
+        }
+
+        .drawer-sub {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--gray-50);
+            transition: max-height .35s ease;
+        }
+
+        .drawer-item.has-sub.open .drawer-sub {
+            max-height: 900px;
+        }
+
+        .drawer-sub a {
+            display: block;
+            padding: 11px 22px 11px 38px;
+            font-size: .84rem;
+            color: var(--gray-600);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .drawer-sub a:hover {
+            color: var(--orange-500);
+        }
+
+        .drawer-divider {
+            padding: 14px 22px 6px;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            background: var(--gray-50);
+        }
+
+        .drawer-contact {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .drawer-contact a {
+            font-size: .86rem;
+            font-weight: 600;
+            color: var(--navy-700);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .drawer-contact svg {
+            width: 15px;
+            height: 15px;
+            flex: none;
+            color: var(--orange-500);
+        }
+
+        /* =====================================================
+     RESPONSIVE
+  ===================================================== */
+        @media (max-width:1024px) {
+            .nav-main {
+                display: none;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .contactbar-nav {
+                display: none;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-grid .img-box {
+                min-height: 280px;
+            }
+
+            .special-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .special-grid .special-item:nth-child(4n) {
+                border-right: 1px solid var(--gray-200);
+            }
+
+            .special-grid .special-item:nth-child(2n) {
+                border-right: none;
+            }
+
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .aimod-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mou-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mou-grid .img-box {
+                min-height: 260px;
+            }
+
+            .mou-card {
+                margin-left: 0;
+                border-radius: var(--radius);
+                margin-top: -30px;
+                width: 90%;
+                margin-inline: auto;
+            }
+
+            .mou-grid .img-box {
+                border-radius: var(--radius);
+            }
+
+            .logo-row {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats .container {
+                grid-template-columns: repeat(3, 1fr);
+                row-gap: 24px;
+            }
+
+            .stat-item:nth-child(3)::after {
+                display: none;
+            }
+
+            .hero-slider {
+                height: 420px;
+            }
+
+            .brand-logo {
+                height: 48px;
+            }
+
+            .why-thumbs .img-box {
+                aspect-ratio: 4/3;
+            }
+        }
+
+        @media (max-width:640px) {
+            .side-tabs {
+                display: none;
+            }
+
+            .topbar-stats {
+                display: none;
+            }
+
+            .topbar .container {
+                justify-content: flex-end;
+            }
+
+            .contactbar-left {
+                gap: 14px;
+            }
+
+            .why-grid .img-box {
+                min-height: 220px;
+            }
+
+            .why-panel {
+                padding: 40px 26px;
+            }
+
+            .why-thumbs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-thumbs .img-box {
+                aspect-ratio: 4/3.1;
+            }
+
+            .special-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .special-grid .special-item {
+                border-right: none !important;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-card {
+                min-height: 150px;
+            }
+
+            .aimod-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mou-grid .img-box {
+                min-height: 200px;
+            }
+
+            .recruiters-top {
+                flex-direction: column;
+            }
+
+            .logo-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .logo-box {
+                height: 56px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+
+            .stats .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-item:nth-child(3)::after {
+                display: block;
+            }
+
+            .stat-item:nth-child(2n)::after {
+                display: none;
+            }
+
+            .hero-slider {
+                height: 260px;
+            }
+
+            .slider-arrow {
+                width: 36px;
+                height: 36px;
+                font-size: .85rem;
+            }
+
+            .brand-logo {
+                height: 40px;
+            }
+
+            .mobile-drawer {
+                width: 300px;
+            }
+        }
+
+        @media (max-width:420px) {
+            .why-thumbs {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .why-thumbs .img-box {
+                aspect-ratio: 16/11;
+            }
+
+            .logo-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-slider {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============ SIDE FLOATING TABS ============ -->
+    <div class="side-tabs">
+        <a href="#">RadioSaaz</a>
+        <a href="#">Ask Saha</a>
+    </div>
+
+    <!-- ============ FLOATING ACTION BUTTONS ============ -->
+    <div class="float-actions">
+        <div class="container">
+            <a class="fab fab-call" href="tel:+919644553399" aria-label="Call us">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+            </a>
+            <a class="fab fab-top" href="#top" aria-label="Back to top">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 19V5M5 12l7-7 7 7" />
+                </svg>
+            </a>
+            <a class="fab fab-wa" href="#" aria-label="WhatsApp us">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4c-4.9 0-8.9 4-8.9 8.9 0 1.57.41 3.1 1.2 4.45L3 21l3.78-1.3a8.9 8.9 0 0 0 4.27 1.09h.01c4.9 0 8.9-4 8.9-8.9a8.86 8.86 0 0 0-2.36-5.57zM12.06 19.2a7.4 7.4 0 0 1-3.77-1.03l-.27-.16-2.8.97.94-2.73-.18-.28a7.4 7.4 0 0 1-1.14-3.96 7.42 7.42 0 0 1 7.42-7.41 7.36 7.36 0 0 1 5.24 2.18 7.36 7.36 0 0 1 2.17 5.24 7.42 7.42 0 0 1-7.41 7.18zm4.07-5.56c-.22-.11-1.32-.65-1.52-.73-.2-.07-.35-.11-.5.11-.15.22-.58.73-.71.88-.13.15-.26.16-.48.05-.22-.11-.94-.35-1.78-1.1-.66-.59-1.1-1.31-1.23-1.53-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.68-1.65-.18-.43-.36-.37-.5-.38h-.43c-.15 0-.39.06-.59.28-.2.22-.78.76-.78 1.85 0 1.09.8 2.14.91 2.29.11.15 1.57 2.4 3.8 3.36.53.23.94.36 1.27.47.53.17 1.01.14 1.39.09.42-.06 1.32-.54 1.5-1.06.19-.52.19-.97.13-1.06-.06-.1-.2-.15-.42-.26z" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <a id="top"></a>
+
+    <!-- ============ TOP UTILITY BAR ============ -->
+    <div class="topbar">
+        <div class="container">
+            <div class="topbar-stats">
+                <span class="stat"><b>100+</b>Industry Partners</span>
+                <span class="sep">&#9670;</span>
+                <span class="stat"><b>Modern</b>Curriculum</span>
+                <span class="sep">&#9670;</span>
+                <span class="stat"><b>60+</b>Years of Legacy</span>
+                <span class="sep">&#9670;</span>
+                <span class="stat"><b>UGC</b>Approved</span>
+                <span class="sep">&#9670;</span>
+                <span class="stat"><b>1st</b>AI University in MP</span>
+            </div>
+            <a href="#" class="topbar-cta">AI Campus Portal &rarr;</a>
+        </div>
+    </div>
+
+    <!-- ============ CONTACT / QUICK NAV BAR ============ -->
+    <div class="contactbar">
+        <div class="container">
+            <div class="contactbar-left">
+                <a href="tel:+919644553399">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                    (+91) 96445 53399
+                </a>
+                <a href="mailto:samglobaluni@gmail.com">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 6 12 13 2 6" />
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                    </svg>
+                    samglobaluni@gmail.com
+                </a>
+            </div>
+            <nav class="contactbar-nav">
+                <div class="nav-item">
+                    <button class="nav-trigger">ERP <span class="caret">&#9662;</span></button>
+                    <div class="dropdown-menu">
+                        <a href="staff-login.html" class="hi">Staff Login</a>
+                        <a href="student-login.html">Student Login</a>
+                    </div>
+                </div>
+                <a href="#">Genius 2026</a>
+                <a href="#">Genius Result 2026</a>
+                <a href="#">Blog</a>
+                <a href="#">Admissions Open</a>
+                <div class="nav-item">
+                    <button class="nav-trigger">Time Table <span class="caret">&#9662;</span></button>
+                    <div class="dropdown-menu">
+                        <a href="#">Class Time Table</a>
+                        <a href="#">Exam Time Table</a>
+                    </div>
+                </div>
+                <a href="#">Contact</a>
+                <div class="nav-item">
+                    <button class="nav-trigger">Media <span class="caret">&#9662;</span></button>
+                    <div class="dropdown-menu">
+                        <a href="#">Photo Gallery</a>
+                        <a href="#">Video Gallery</a>
+                        <a href="#">Press Coverage</a>
+                        <a href="#">Newsletter</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ============ MAIN HEADER ============ -->
+    <header class="mainheader">
+        <div class="container">
+            <a href="#" class="brand">
+                <img src="assets/logo.png" alt="SAM Global University" class="brand-logo">
+            </a>
+
+            <nav class="nav-main">
+                <div class="nav-item">
+                    <a href="#" class="nav-trigger">About <span class="caret">&#9662;</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#">University</a>
+                        <a href="#">SAM Group</a>
+                        <a href="#">Vision Mission &amp; Values</a>
+                        <a href="#">Chancellor's Message</a>
+                        <a href="#">Vice-Chancellor's Message</a>
+                        <a href="#">Awards &amp; Achievements</a>
+                        <a href="#">University Administration</a>
+                        <a href="#">Corporate Social Responsibility</a>
+                        <a href="#">Infrastructure</a>
+                        <a href="#">Approvals and Ordinances</a>
+                        <a href="#">Mandatory Disclosures</a>
+                        <a href="#">Hall of Honors</a>
+                        <a href="#">Our Tie-ups MoUs</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-trigger">Admissions <span class="caret">&#9662;</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#">Admission Procedure</a>
+                        <a href="#">Admission Assistance</a>
+                        <a href="#">Fee Structure</a>
+                        <a href="#">Refund Policy</a>
+                        <a href="#">Scholarships</a>
+                        <a href="#">FAQs</a>
+                        <a href="#">General Rules and Regulations</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-trigger">Academics <span class="caret">&#9662;</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#">Academic Leadership</a>
+                        <a href="#">Academic Council</a>
+                        <a href="#">Teaching Methodology</a>
+                        <a href="#">Institutional Innovation Council (IIC)</a>
+                        <a href="#">Library</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-trigger">Faculties <span class="caret">&#9662;</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#">School of Engineering &amp; Technology</a>
+                        <a href="#">School of Management</a>
+                        <a href="#">School of Medical &amp; Paramedical</a>
+                        <a href="#">School of Pharmacy</a>
+                        <a href="#">School of Agriculture</a>
+                        <a href="#">Faculty Directory</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-trigger">Campus Life <span class="caret">&#9662;</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#">Hostel Facilities</a>
+                        <a href="#">Sports &amp; Fitness</a>
+                        <a href="#">Clubs &amp; Societies</a>
+                        <a href="#">Cultural Activities</a>
+                        <a href="#">Student Wellness</a>
+                        <a href="#">Campus Tour</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-trigger">Placements <span class="caret">&#9662;</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#">Our Recruiters</a>
+                        <a href="#">Placement Cell</a>
+                        <a href="#">Corporate Interaction</a>
+                        <a href="#">Placement Photos</a>
+                        <a href="#">Our Achievement</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-trigger">Publication <span class="caret">&#9662;</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#">Research Papers</a>
+                        <a href="#">Journals</a>
+                        <a href="#">University Newsletter</a>
+                        <a href="#">Conference Proceedings</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-trigger">R &amp; D <span class="caret">&#9662;</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#">ICET-2026</a>
+                        <a href="#">Research and Development facilities</a>
+                        <a href="#">Research &amp; Development</a>
+                        <a href="#">Research Projects</a>
+                        <a href="#">Industrial Consultancy</a>
+                        <a href="#">Foreign Collaborations</a>
+                        <a href="#">E Cell</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <a href="#" class="nav-trigger">Downloads <span class="caret">&#9662;</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#">Brochure</a>
+                        <a href="#">Academic Calendar</a>
+                        <a href="#">Syllabus</a>
+                        <a href="#">Circulars &amp; Notices</a>
+                        <a href="#">Forms</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="header-tools">
+                <span class="icon-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="m21 21-4.3-4.3" />
+                    </svg>
+                </span>
+                <div class="burger" id="burgerBtn" aria-label="Open menu"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============ MOBILE SLIDE-IN DRAWER ============ -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <aside class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-head">
+            <img src="assets/logo.png" alt="SAM Global University" class="drawer-logo">
+            <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+        </div>
+
+        <nav class="drawer-nav">
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">About <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub">
+                    <a href="#">University</a><a href="#">SAM Group</a><a href="#">Vision Mission &amp; Values</a>
+                    <a href="#">Chancellor's Message</a><a href="#">Vice-Chancellor's Message</a>
+                    <a href="#">Awards &amp; Achievements</a><a href="#">University Administration</a>
+                    <a href="#">Corporate Social Responsibility</a><a href="#">Infrastructure</a>
+                    <a href="#">Approvals and Ordinances</a><a href="#">Mandatory Disclosures</a>
+                    <a href="#">Hall of Honors</a><a href="#">Our Tie-ups MoUs</a>
+                </div>
+            </div>
+
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">Admissions <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub">
+                    <a href="#">Admission Procedure</a><a href="#">Admission Assistance</a><a href="#">Fee Structure</a>
+                    <a href="#">Refund Policy</a><a href="#">Scholarships</a><a href="#">FAQs</a>
+                    <a href="#">General Rules and Regulations</a>
+                </div>
+            </div>
+
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">Academics <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub">
+                    <a href="#">Academic Leadership</a><a href="#">Academic Council</a><a href="#">Teaching
+                        Methodology</a>
+                    <a href="#">Institutional Innovation Council (IIC)</a><a href="#">Library</a>
+                </div>
+            </div>
+
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">Faculties <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub">
+                    <a href="#">School of Engineering &amp; Technology</a><a href="#">School of Management</a>
+                    <a href="#">School of Medical &amp; Paramedical</a><a href="#">School of Pharmacy</a>
+                    <a href="#">School of Agriculture</a><a href="#">Faculty Directory</a>
+                </div>
+            </div>
+
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">Campus Life <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub">
+                    <a href="#">Hostel Facilities</a><a href="#">Sports &amp; Fitness</a><a href="#">Clubs &amp;
+                        Societies</a>
+                    <a href="#">Cultural Activities</a><a href="#">Student Wellness</a><a href="#">Campus Tour</a>
+                </div>
+            </div>
+
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">Placements <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub">
+                    <a href="#">Our Recruiters</a><a href="#">Placement Cell</a><a href="#">Corporate Interaction</a>
+                    <a href="#">Placement Photos</a><a href="#">Our Achievement</a>
+                </div>
+            </div>
+
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">Publication <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub">
+                    <a href="#">Research Papers</a><a href="#">Journals</a><a href="#">University Newsletter</a>
+                    <a href="#">Conference Proceedings</a>
+                </div>
+            </div>
+
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">R &amp; D <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub">
+                    <a href="#">ICET-2026</a><a href="#">Research and Development facilities</a>
+                    <a href="#">Research &amp; Development</a><a href="#">Research Projects</a>
+                    <a href="#">Industrial Consultancy</a><a href="#">Foreign Collaborations</a><a href="#">E Cell</a>
+                </div>
+            </div>
+
+            <div class="drawer-item"><a href="#" class="drawer-link">NSS</a></div>
+            <div class="drawer-item"><a href="#" class="drawer-link">NCC</a></div>
+
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">Downloads <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub">
+                    <a href="#">Brochure</a><a href="#">Academic Calendar</a><a href="#">Syllabus</a>
+                    <a href="#">Circulars &amp; Notices</a><a href="#">Forms</a>
+                </div>
+            </div>
+
+            <div class="drawer-divider">More</div>
+
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">ERP <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub"><a href="staff-login.html">Staff Login</a><a href="student-login.html">Student
+                        Login</a></div>
+            </div>
+            <div class="drawer-item"><a href="#" class="drawer-link">Genius 2026</a></div>
+            <div class="drawer-item"><a href="#" class="drawer-link">Genius Result 2026</a></div>
+            <div class="drawer-item"><a href="#" class="drawer-link">Blog</a></div>
+            <div class="drawer-item"><a href="#" class="drawer-link">Admissions Open</a></div>
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">Time Table <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub"><a href="#">Class Time Table</a><a href="#">Exam Time Table</a></div>
+            </div>
+            <div class="drawer-item"><a href="#" class="drawer-link">Contact</a></div>
+            <div class="drawer-item has-sub">
+                <button class="drawer-link" type="button">Media <span class="d-caret">&#9662;</span></button>
+                <div class="drawer-sub">
+                    <a href="#">Photo Gallery</a><a href="#">Video Gallery</a><a href="#">Press Coverage</a><a
+                        href="#">Newsletter</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="drawer-contact">
+            <a href="tel:+919644553399">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                (+91) 96445 53399
+            </a>
+            <a href="mailto:samglobaluni@gmail.com">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 6 12 13 2 6" />
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                </svg>
+                samglobaluni@gmail.com
+            </a>
+        </div>
+    </aside>
+
+    <!-- ============ HERO IMAGE SLIDER ============ -->
+    <section class="hero-slider" id="heroSlider">
+        <div class="slides">
+            <div class="slide active">
+                <div class="img-box"><img src="assets/slider-1.webp" alt="SAM Global University campus slide"></div>
+            </div>
+            <div class="slide">
+                <div class="img-box"><img src="assets/slider-2.webp" alt="SAM Global University campus slide"></div>
+            </div>
+            <div class="slide">
+                <div class="img-box"><img src="assets/slider-3.jpeg" alt="SAM Global University campus slide">
+                </div>
+            </div>
+            <div class="slide">
+                <div class="img-box"><img src="assets/slider-5.jpeg" alt="SAM Global University campus slide">
+                </div>
+            </div>
+        </div>
+        <button class="slider-arrow prev" aria-label="Previous slide">&#10094;</button>
+        <button class="slider-arrow next" aria-label="Next slide">&#10095;</button>
+        <div class="slider-dots">
+            <span class="dot active" data-i="0"></span>
+            <span class="dot" data-i="1"></span>
+            <span class="dot" data-i="2"></span>
+            <span class="dot" data-i="3"></span>
+        </div>
+    </section>
+
+    <!-- ============ STATS STRIP ============ -->
+    <section class="stats">
+        <div class="container">
+            <div class="stat-item">
+                <span class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 10 12 5 2 10l10 5 10-5z" />
+                        <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+                    </svg></span>
+                <div>
+                    <div class="num">50000+</div>
+                    <div class="lbl">Students</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="6" />
+                        <path d="M9 14 6 22l6-3 6 3-3-8" />
+                    </svg></span>
+                <div>
+                    <div class="num">20+</div>
+                    <div class="lbl">Awards</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 11a4 4 0 1 0-8 0" />
+                        <path d="M3 21v-2a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v2" />
+                    </svg></span>
+                <div>
+                    <div class="num">180+</div>
+                    <div class="lbl">MOUs</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="7" r="4" />
+                        <path d="M5.5 21a6.5 6.5 0 0 1 13 0" />
+                    </svg></span>
+                <div>
+                    <div class="num">145+</div>
+                    <div class="lbl">Top Experts</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="8" r="3" />
+                        <circle cx="17" cy="9" r="2.5" />
+                        <path d="M3 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1" />
+                    </svg></span>
+                <div>
+                    <div class="num">20%</div>
+                    <div class="lbl">International Students</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ WHY CHOOSE SGU ============ -->
+    <section class="why">
+        <div class="why-grid">
+            <div class="img-box"><img src="assets/stud.webp" alt="Students Group Photo"></div>
+            <div class="why-panel">
+                <h2>Why Choose SGU?</h2>
+                <p>SAM Global University, established in 2019 under the umbrella of the Guru Hargobind Society, has
+                    emerged as the best private university in Madhya Pradesh, India. With a rich legacy of six decades,
+                    SGU has been imparting quality education and setting new benchmarks in the field. The university
+                    holds the approval of the Madhya Pradesh Niji Vishwavidhyalaya (Sthapana Avam Sanchalan) Adhiniyam
+                    2007 and UGC, further validating its commitment to excellence.</p>
+                <p>We also balance legacy with innovation and are on an incessant journey of evolution. We are the first
+                    AI-enabled University of Central India to show our commitment towards innovation, technology, and
+                    progress for students.</p>
+                <a href="#" class="btn btn-light">Read More</a>
+            </div>
+        </div>
+        <div class="why-thumbs">
+            <div class="img-box"><img src="assets/act-1.webp" alt="Campus Event"></div>
+            <div class="img-box"><img src="assets/act-2.webp" alt="Sports Achiever"></div>
+            <div class="img-box"><img src="assets/act-3.webp" alt="Cultural Fest"></div>
+            <div class="img-box"><img src="assets/act-5.webp" alt="Convocation"></div>
+        </div>
+    </section>
+
+    <!-- ============ WHAT MAKES US SPECIAL ============ -->
+    <section class="special">
+        <div class="container">
+            <div class="section-head">
+                <h2>What Makes Us Special?</h2>
+                <p>Rooted in excellence, driven by innovation—our legacy is built on top rankings, breakthrough
+                    achievements, and a future-forward mindset that continues to shape leaders of tomorrow.</p>
+            </div>
+
+            <div class="special-grid">
+                <div class="special-item">
+                    <span class="sp-ico c-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.6.5 1 1.3 1 2.1V16h6v-1.4c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 2z" />
+                        </svg></span>
+                    <h3>Innovative Pedagogy</h3>
+                    <p>Addressing real problems to promote equitable learning.</p>
+                </div>
+                <div class="special-item">
+                    <span class="sp-ico c-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 2v6L4 21h16l-5-13V2" />
+                            <path d="M9 2h6" />
+                        </svg></span>
+                    <h3>Cutting Edge Research</h3>
+                    <p>Leading the search for knowledge with our highly equipped research facilities.</p>
+                </div>
+                <div class="special-item">
+                    <span class="sp-ico c-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 2c2 2 3 5 3 8 0 2-1 4-3 5-2-1-3-3-3-5 0-3 1-6 3-8z" />
+                            <path d="M9 16l-3 5 3-1 3 1-1-4M15 16l3 5-3-1-3 1 1-4" />
+                        </svg></span>
+                    <h3>Start Ups</h3>
+                    <p>An Incubation environment for innovative student entrepreneurship projects.</p>
+                </div>
+                <div class="special-item">
+                    <span class="sp-ico c-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z" />
+                        </svg></span>
+                    <h3>Global Exposure</h3>
+                    <p>Collaborations with international universities ensure world-class education.</p>
+                </div>
+
+                <div class="special-item">
+                    <span class="sp-ico c-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M3 21V9l9-6 9 6v12" />
+                            <path d="M9 21v-6h6v6" />
+                        </svg></span>
+                    <h3>Advanced Infrastructure</h3>
+                    <p>State-of-the-art labs, libraries, and smart classrooms enhance learning.</p>
+                </div>
+                <div class="special-item">
+                    <span class="sp-ico c-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="m18 8 3 3-3 3M6 8 3 11l3 3" />
+                            <path d="M14 4 10 20" />
+                        </svg></span>
+                    <h3>Industry Partnerships</h3>
+                    <p>L&amp;T Edutech, Oracle Academy, STL, RedHat, and NSE empower students.</p>
+                </div>
+                <div class="special-item">
+                    <span class="sp-ico c-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="8" r="6" />
+                            <path d="M9 14 6 22l6-3 6 3-3-8" />
+                        </svg></span>
+                    <h3>Awards</h3>
+                    <p>Outstanding University in STEM Education, Best Upcoming University, Best Placement Group and
+                        more.</p>
+                </div>
+                <div class="special-item">
+                    <span class="sp-ico c-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="9" cy="8" r="3" />
+                            <circle cx="17" cy="6" r="2" />
+                            <path d="M3 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1" />
+                        </svg></span>
+                    <h3>Mentors</h3>
+                    <p>300+ experts for guiding students and helping to our students.</p>
+                </div>
+
+                <div class="special-item">
+                    <span class="sp-ico c-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 10 12 5 2 10l10 5 10-5z" />
+                            <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+                        </svg></span>
+                    <h3>Alumni</h3>
+                    <p>A strong network of successful professionals worldwide.</p>
+                </div>
+                <div class="special-item">
+                    <span class="sp-ico c-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14" />
+                            <path d="M4 19a2 2 0 0 0 2 2h14M4 19a2 2 0 0 1 2-2h14" />
+                        </svg></span>
+                    <h3>Programs Offered</h3>
+                    <p>Medical, Management, IT, Engineering, Agriculture, and more.</p>
+                </div>
+                <div class="special-item">
+                    <span class="sp-ico c-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="7" width="18" height="13" rx="2" />
+                            <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg></span>
+                    <h3>Placement</h3>
+                    <p>Opportunities at ICICI bank, Amazon, Mahindra, SBI, and more.</p>
+                </div>
+                <div class="special-item">
+                    <span class="sp-ico c-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="m12 2 2.9 6 6.6.6-5 4.4 1.5 6.4L12 16.8 6 19.4 7.5 13 2.5 8.6l6.6-.6z" />
+                        </svg></span>
+                    <h3>Achievements</h3>
+                    <p>Excellence in STEM, girls' education, and placements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ COURSES WE OFFER ============ -->
+    <section class="courses">
+        <div class="container">
+            <div class="courses-head">
+                <h2>Courses We Offer</h2>
+                <p>Each program is crafted to provide a strong foundation, practical skills, and industry exposure,
+                    empowering students to build meaningful careers in a rapidly evolving world.</p>
+            </div>
+
+            <div class="courses-grid">
+                <div class="course-card feature">
+                    <div class="feature-list">
+                        <span class="fl-item"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <path
+                                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                            </svg>Hands-on</span>
+                        <span class="fl-item"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z" />
+                                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                            </svg>Industry-relevant</span>
+                        <span class="fl-item"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <rect x="4" y="7" width="16" height="13" rx="2" />
+                                <path d="M9 7V4h6v3M9 13h.01M15 13h.01M9 17h6" />
+                            </svg>AI-enabled</span>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="img-box"><img src="assets/2.webp" alt="Engineering and Technology"><span></span>
+                    </div>
+                    <div class="ctext">
+                        <h3>Engineering and<br>Technology</h3>
+                    </div>
+                    <a href="#" class="more">Learn More &rarr;</a>
+                </div>
+                <div class="course-card">
+                    <div class="img-box"><img src="assets/3.png" alt="Management"><span></span></div>
+                    <div class="ctext">
+                        <h3>Management</h3>
+                    </div>
+                    <a href="#" class="more">Learn More &rarr;</a>
+                </div>
+                <div class="course-card">
+                    <div class="img-box"><img src="assets/4.png" alt="AYUSH"><span></span></div>
+                    <div class="ctext">
+                        <h3>AYUSH</h3>
+                    </div>
+                    <a href="#" class="more">Learn More &rarr;</a>
+                </div>
+                <div class="course-card">
+                    <div class="img-box"><img src="assets/5.png" alt="Medical and Paramedical"><span></span></div>
+                    <div class="ctext">
+                        <h3>Medical and<br>Paramedical</h3>
+                    </div>
+                    <a href="#" class="more">Learn More &rarr;</a>
+                </div>
+                <div class="course-card">
+                    <div class="img-box"><img src="assets/6.png" alt="Nursing"><span></span></div>
+                    <div class="ctext">
+                        <h3>Nursing</h3>
+                    </div>
+                    <a href="#" class="more">Learn More &rarr;</a>
+                </div>
+                <div class="course-card">
+                    <div class="img-box"><img src="assets/7.png" alt="Arts and Humanities"><span></span></div>
+                    <div class="ctext">
+                        <h3>Arts and Humanities</h3>
+                    </div>
+                    <a href="#" class="more">Learn More &rarr;</a>
+                </div>
+                <div class="course-card">
+                    <div class="img-box"><img src="assets/8.png" alt="Science and I.T."><span></span></div>
+                    <div class="ctext">
+                        <h3>Science and I.T.</h3>
+                    </div>
+                    <a href="#" class="more">Learn More &rarr;</a>
+                </div>
+                <div class="course-card">
+                    <div class="img-box"><img src="assets/9.webp" alt="Agricultural Science"><span></span></div>
+                    <div class="ctext">
+                        <h3>Agricultural Science</h3>
+                    </div>
+                    <a href="#" class="more">Learn More &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ AI MODULES ============ -->
+    <section class="aimod">
+        <div class="container">
+            <div class="section-head">
+                <span class="eyebrow">Smart Academic Layer</span>
+                <h2>AI Modules That <span class="hi">Augment Every Interaction</span></h2>
+                <p>From personalised mentoring to simulation labs and research copilots — our AI modules augment every
+                    classroom, lab and counselling interaction.</p>
+            </div>
+
+            <div class="aimod-grid">
+                <div class="ai-card"><span class="num">01</span>
+                    <h3>SAHA</h3>
+                    <div class="role">Academic Counselor</div>
+                    <div class="rule"></div>
+                    <p>AI-driven counseling optimizes traditional paradigms through perpetual accessibility,
+                        individualized interventions, and superior operational scalability.</p>
+                </div>
+                <div class="ai-card"><span class="num">02</span>
+                    <h3>BODHI</h3>
+                    <div class="role">AI Tutor</div>
+                    <div class="rule"></div>
+                    <p>AI tutoring interfaces optimize smart classroom content delivery by facilitating adaptive,
+                        immersive, and individualized learning experiences.</p>
+                </div>
+                <div class="ai-card"><span class="num">03</span>
+                    <h3>AVYUKTAA</h3>
+                    <div class="role">Simulation Lab</div>
+                    <div class="rule"></div>
+                    <p>A fully implemented simulation lab providing students with access to hands-on learning
+                        experiences, allowing them to conduct experiments and simulations in a virtual environment.</p>
+                </div>
+                <div class="ai-card"><span class="num">04</span>
+                    <h3>ANVII</h3>
+                    <div class="role">Research Assistant</div>
+                    <div class="rule"></div>
+                    <p>An AI research assistant who helps improve research processes and project evaluations through
+                        intelligent insights and automation.</p>
+                </div>
+                <div class="ai-card"><span class="num">05</span>
+                    <h3>AAJA</h3>
+                    <div class="role">3D Hologram Presenter</div>
+                    <div class="rule"></div>
+                    <p>A 3D hologram that provides interactive demonstrations where participants can interact with the
+                        speaker more engagingly in virtual events and workshops.</p>
+                </div>
+                <div class="ai-card"><span class="num">06</span>
+                    <h3>BAANI</h3>
+                    <div class="role">AI Evaluator</div>
+                    <div class="rule"></div>
+                    <p>An evaluator bot that assists with periodical and continuous campus evaluations with speed and
+                        accuracy.</p>
+                </div>
+                <div class="ai-card"><span class="num">07</span>
+                    <h3>PADMAA</h3>
+                    <div class="role">AI Interview Coach</div>
+                    <div class="rule"></div>
+                    <p>Helps students better prepare for internships and job interviews with AI-driven mock interviews,
+                        feedback, and coaching.</p>
+                </div>
+                <div class="ai-card"><span class="num">08</span>
+                    <h3>E-BLOCK</h3>
+                    <div class="role">Credential Verification</div>
+                    <div class="rule"></div>
+                    <p>Offers enhanced security and transparency for academic records through decentralized access and
+                        lifelong digital verification.</p>
+                </div>
+                <div class="ai-card"><span class="num">09</span>
+                    <h3>IRAAJ</h3>
+                    <div class="role">Humanoid Robots</div>
+                    <div class="rule"></div>
+                    <p>Humanoid robots capable of making complex decisions based on environmental cues, bringing AI into
+                        everyday campus interactions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ MOU's AND TIE-UPS ============ -->
+    <section class="mou">
+        <div class="container">
+            <div class="section-head">
+                <h2>MOU's and Tie-ups</h2>
+            </div>
+            <div class="mou-grid">
+                <div class="img-box"><img src="assets/96389c9f25c62c92d886c8b60d1ffd263c5f82f4.webp"
+                        alt="Students in Classroom"></div>
+                <div class="mou-card">
+                    <p>To ensure that the students stride ahead and lead with confidence, the management has signed MOUs
+                        with several international and national premier institutes. This has put SAM Global University
+                        on a fast track to the next level and deepened its commitment to the development of students,
+                        society, and the nation.</p>
+                    <a href="#" class="btn btn-navy">Read More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="recruiters">
+            <div class="container">
+                <div class="recruiters-top">
+                    <h3>Our recruiters that power your future!</h3>
+                    <p>Our strong partnerships with leading industry players ensure hands-on learning, exposure, and
+                        career-ready skills.</p>
+                </div>
+                <div class="logo-row">
+                    <div class="logo-box">
+                        <div class="img-box"><img src="assets/comp-1.jpg" alt="Axis Bank"></div>
+                    </div>
+                    <div class="logo-box">
+                        <div class="img-box"><img src="assets/comp-2.jpg" alt="Mahindra"></div>
+                    </div>
+                    <div class="logo-box">
+                        <div class="img-box"><img src="assets/comp-3.jpg" alt="Hyundai"></div>
+                    </div>
+                    <div class="logo-box">
+                        <div class="img-box"><img src="assets/comp-4.jpg" alt="Patanjali"></div>
+                    </div>
+                    <div class="logo-box">
+                        <div class="img-box"><img src="assets/comp-5.jpg" alt="Vertex"></div>
+                    </div>
+                    <div class="logo-box">
+                        <div class="img-box"><img src="assets/comp-6.jpg" alt="Reliance"></div>
+                    </div>
+                    <div class="logo-box">
+                        <div class="img-box"><img src="assets/comp-7.jpg" alt="Justdial"></div>
+                    </div>
+                    <div class="logo-box">
+                        <div class="img-box"><img src="assets/comp-8.jpg" alt="ICICI Bank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="footer-bg">
+            <div class="img-box"><img src="" alt="Footer background"><span></span></div>
+        </div>
+        <div class="footer-overlay"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#">University</a></li>
+                        <li><a href="#">SAM Group</a></li>
+                        <li><a href="#">Chancellor's Message</a></li>
+                        <li><a href="#">Vice-Chancellor's Message</a></li>
+                        <li><a href="#">Awards &amp; Achievements</a></li>
+                        <li><a href="#">Media</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Admissions</a></li>
+                        <li><a href="#">Infrastructure</a></li>
+                        <li><a href="#">Mandatory Disclosures</a></li>
+                        <li><a href="#">Anti Ragging Committee</a></li>
+                        <li><a href="#">Terms and Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>What's Happening</h4>
+                    <ul>
+                        <li><a href="#">Upcoming Events</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Latest News</a></li>
+                        <li><a href="#">International Conference</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <address>
+                        <span class="sub-label">Corporate Address</span>
+                        <span class="addr-strong">SAM Global University Village Agariya Chopda, Raisen Pin - 464551
+                            (M.P)</span>
+                        <span class="sub-label">Phone</span>
+                        <span class="addr-strong">(+91) 96445 53399</span>
+                        <span class="sub-label">Email</span>
+                        <span class="addr-strong" style="margin-bottom:2px;">aiu@samglobaluniversity.ac.in</span>
+                        <span class="addr-strong" style="margin-bottom:2px;">info@samglobaluniversity.ac.in</span>
+                        <span class="addr-strong">samglobaluni@gmail.com</span>
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2019 SAM Global University. All Rights Reserved</span>
+                <span>Website Developed by <a href="#">Silvery Infotech</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ---------- Hero image slider ---------- */
+        (function () {
+            const root = document.getElementById('heroSlider');
+            const slides = root.querySelectorAll('.slide');
+            const dots = root.querySelectorAll('.dot');
+            let current = 0;
+            let timer;
+
+            function show(i) {
+                current = (i + slides.length) % slides.length;
+                slides.forEach(s => s.classList.remove('active'));
+                dots.forEach(d => d.classList.remove('active'));
+                slides[current].classList.add('active');
+                dots[current].classList.add('active');
+            }
+            function start() { timer = setInterval(() => show(current + 1), 4500); }
+            function stop() { clearInterval(timer); }
+
+            root.querySelector('.slider-arrow.next').addEventListener('click', () => { show(current + 1); stop(); start(); });
+            root.querySelector('.slider-arrow.prev').addEventListener('click', () => { show(current - 1); stop(); start(); });
+            dots.forEach(d => d.addEventListener('click', () => { show(+d.dataset.i); stop(); start(); }));
+            root.addEventListener('mouseenter', stop);
+            root.addEventListener('mouseleave', start);
+
+            start();
+        })();
+
+        /* ---------- Mobile slide-in drawer ---------- */
+        (function () {
+            const burger = document.getElementById('burgerBtn');
+            const drawer = document.getElementById('mobileDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            const closeBtn = document.getElementById('drawerClose');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+            burger.addEventListener('click', openDrawer);
+            closeBtn.addEventListener('click', closeDrawer);
+            overlay.addEventListener('click', closeDrawer);
+
+            /* accordion sub-menus */
+            document.querySelectorAll('.drawer-item.has-sub > .drawer-link').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item = btn.parentElement;
+                    const wasOpen = item.classList.contains('open');
+                    document.querySelectorAll('.drawer-item.has-sub.open').forEach(el => el.classList.remove('open'));
+                    if (!wasOpen) item.classList.add('open');
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccSoft 2.0 Login | SAM Group of Institutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy-900: #0a1840;
+            --plum-700: #4a2440;
+            --plum-800: #3c1c34;
+            --blue-500: #2563eb;
+            --green-700: #1e7d3c;
+            --gray-50: #f6f7fa;
+            --gray-100: #eef0f6;
+            --gray-200: #e3e6ef;
+            --gray-300: #d4d8e3;
+            --gray-400: #9aa1b4;
+            --gray-600: #5b6478;
+            --gray-800: #2b3142;
+            --red-600: #d93025;
+            --page-bg: #d4d8e1;
+            --white: #ffffff;
+            --radius: 4px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: var(--page-bg);
+            color: var(--gray-800);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =====================================================
+           PAGE LAYOUT
+        ===================================================== */
+        .page-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px 90px;
+        }
+
+        /* =====================================================
+           CARD STACK EFFECT
+           (the two thin layers peeking out beneath the main card,
+           matching the reference screenshot)
+        ===================================================== */
+        .card-stack {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .stack-layer {
+            position: absolute;
+            left: 6%;
+            right: 6%;
+            height: 14px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-300);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .stack-layer.l1 {
+            bottom: -8px;
+            z-index: 1;
+        }
+
+        .stack-layer.l2 {
+            left: 9%;
+            right: 9%;
+            bottom: -15px;
+            z-index: 0;
+            background: var(--gray-100);
+        }
+
+        /* =====================================================
+           LOGIN CARD
+        ===================================================== */
+        .login-card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            background: var(--white);
+            border-top: 4px solid var(--navy-900);
+            box-shadow: 0 18px 40px rgba(10, 20, 60, .14);
+            border-radius: 2px;
+        }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 28px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .card-head .head-mark {
+            width: 30px;
+            height: 30px;
+            flex: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', Arial, sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #f0c419;
+        }
+
+        .card-head h1 {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--gray-600);
+        }
+
+        .card-body {
+            padding: 30px 36px 34px;
+        }
+
+        /* ---------- Institution logo ---------- */
+        .brand-logo-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+
+        .brand-logo-wrap img {
+            max-width: 100%;
+            height: auto;
+            max-height: 130px;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* ---------- Radio option ---------- */
+        .role-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+
+        .role-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-weight: 700;
+            font-size: .98rem;
+            color: var(--gray-800);
+            cursor: pointer;
+        }
+
+        .role-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--blue-500);
+            cursor: pointer;
+        }
+
+        /* ---------- Form fields ---------- */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: .95rem;
+            padding: 13px 16px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: var(--radius);
+            color: var(--gray-800);
+            background: var(--white);
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .form-group input::placeholder {
+            color: #9aa1b4;
+        }
+
+        .form-group input:focus {
+            border-color: var(--blue-500);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+        }
+
+        .form-group input.field-error {
+            border-color: var(--red-600);
+        }
+
+        .field-error-msg {
+            display: none;
+            font-size: .8rem;
+            font-weight: 600;
+            color: var(--red-600);
+            margin-top: 7px;
+            line-height: 1.4;
+        }
+
+        .field-error-msg.show {
+            display: block;
+        }
+
+        /* ---------- Toggle switch ---------- */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 22px 0 24px;
+        }
+
+        .switch {
+            position: relative;
+            width: 46px;
+            height: 24px;
+            flex: none;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch .slider {
+            position: absolute;
+            inset: 0;
+            background: var(--gray-300);
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        .switch .slider::before {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            left: 3px;
+            top: 3px;
+            background: var(--white);
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+            transition: transform .2s;
+        }
+
+        .switch input:checked+.slider {
+            background: var(--blue-500);
+        }
+
+        .switch input:checked+.slider::before {
+            transform: translateX(22px);
+        }
+
+        .toggle-row label {
+            font-weight: 700;
+            font-size: .95rem;
+            color: var(--gray-800);
+            cursor: pointer;
+        }
+
+        /* ---------- Footer row: signup + login button ---------- */
+        .actions-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .signup-link {
+            color: var(--blue-500);
+            font-weight: 600;
+            font-size: .92rem;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-login {
+            background: var(--plum-800);
+            color: #fff;
+            font-weight: 700;
+            font-size: .95rem;
+            padding: 13px 30px;
+            border-radius: var(--radius);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background .2s, transform .1s;
+        }
+
+        .btn-login:hover {
+            background: var(--plum-700);
+        }
+
+        .btn-login:active {
+            transform: translateY(1px);
+        }
+
+        /* =====================================================
+           SITE FOOTER BAR
+        ===================================================== */
+        .site-footer {
+            background: #2b2b2b;
+            color: #d8d8d8;
+            font-size: .85rem;
+            padding: 16px 28px;
+        }
+
+        .site-footer .footer-row {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .site-footer a {
+            color: #fff;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+        @media (max-width: 640px) {
+            .page-wrap {
+                padding: 36px 16px 70px;
+                align-items: flex-start;
+            }
+
+            .card-head {
+                padding: 15px 20px;
+            }
+
+            .card-head h1 {
+                font-size: 1rem;
+            }
+
+            .card-body {
+                padding: 24px 22px 26px;
+            }
+
+            .brand-logo-wrap {
+                margin-bottom: 22px;
+            }
+
+            .brand-logo-wrap img {
+                max-height: 100px;
+            }
+
+            .role-option {
+                font-size: .9rem;
+            }
+
+            .form-group input[type="text"],
+            .form-group input[type="password"] {
+                padding: 12px 14px;
+                font-size: .9rem;
+            }
+
+            .actions-row {
+                flex-direction: column-reverse;
+                align-items: stretch;
+                gap: 14px;
+            }
+
+            .btn-login {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .signup-link {
+                text-align: center;
+            }
+
+            .site-footer .footer-row {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .card-body {
+                padding: 20px 16px 22px;
+            }
+
+            .card-head {
+                gap: 8px;
+                padding: 13px 16px;
+            }
+
+            .card-head h1 {
+                font-size: .9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-wrap">
+        <div class="card-stack">
+            <div class="stack-layer l2"></div>
+            <div class="stack-layer l1"></div>
+
+            <div class="login-card">
+                <div class="card-head">
+                    <span class="head-mark">&#603;</span>
+                    <h1>AccSoft 2.0 Login</h1>
+                </div>
+
+                <div class="card-body">
+                    <div class="brand-logo-wrap">
+                        <img src="assets/sam_logo1.png" alt="SAM Group of Institutions">
+                    </div>
+
+                    <form id="loginForm" novalidate autocomplete="off">
+                        <div class="role-row">
+                            <label class="role-option">
+                                <input type="radio" name="role" value="parent_student" checked>
+                                Parent / Student
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" id="loginName" name="loginName" placeholder="Login name"
+                                autocomplete="off">
+                            <div class="field-error-msg" id="loginNameError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" id="loginPassword" name="loginPassword" placeholder="Password"
+                                autocomplete="off">
+                            <div class="field-error-msg" id="loginPasswordError"></div>
+                        </div>
+
+                        <div class="toggle-row">
+                            <span class="switch">
+                                <input type="checkbox" id="testPortalToggle">
+                                <span class="slider"
+                                    onclick="document.getElementById('testPortalToggle').click()"></span>
+                            </span>
+                            <label for="testPortalToggle">Login To Online Test Portal?</label>
+                        </div>
+
+                        <div class="actions-row">
+                            <a href="#" class="signup-link">SignUp (New User)</a>
+                            <button type="submit" class="btn-login">Login &raquo;</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-row">
+            <span>A Product For Educational Institute By <a href="#">Emperor Solutions Pvt. Ltd.</a></span>
+            <span>Updated On : 15-Jun-2026</span>
+        </div>
+    </footer>
+
+    <script>
+        /* =====================================================
+           LOGIN VALIDATION
+           Rule: if Login name AND Password both equal "240851",
+           redirect to dashboard.html. Otherwise show an inline
+           error message under the relevant input box(es).
+
+           To change the accepted code, edit VALID_CODE below.
+        ===================================================== */
+        (function () {
+            const VALID_CODE = '240851';
+            const REDIRECT_URL = 'dashboard.html';
+
+            const form = document.getElementById('loginForm');
+            const loginNameInput = document.getElementById('loginName');
+            const passwordInput = document.getElementById('loginPassword');
+            const loginNameError = document.getElementById('loginNameError');
+            const passwordError = document.getElementById('loginPasswordError');
+
+            function clearErrors() {
+                loginNameInput.classList.remove('field-error');
+                passwordInput.classList.remove('field-error');
+                loginNameError.classList.remove('show');
+                passwordError.classList.remove('show');
+                loginNameError.textContent = '';
+                passwordError.textContent = '';
+            }
+
+            function showError(inputEl, errorEl, message) {
+                inputEl.classList.add('field-error');
+                errorEl.textContent = message;
+                errorEl.classList.add('show');
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                clearErrors();
+
+                const nameVal = loginNameInput.value.trim();
+                const passVal = passwordInput.value.trim();
+
+                let hasError = false;
+
+                if (nameVal === '') {
+                    showError(loginNameInput, loginNameError, 'Please enter your login name.');
+                    hasError = true;
+                } else if (nameVal !== VALID_CODE) {
+                    showError(loginNameInput, loginNameError, 'Invalid login name.');
+                    hasError = true;
+                }
+
+                if (passVal === '') {
+                    showError(passwordInput, passwordError, 'Please enter your password.');
+                    hasError = true;
+                } else if (passVal !== VALID_CODE) {
+                    showError(passwordInput, passwordError, 'Invalid password.');
+                    hasError = true;
+                }
+
+                if (hasError) {
+                    return;
+                }
+
+                // Both fields match the valid code — proceed to dashboard
+                window.location.href = REDIRECT_URL;
+            });
+
+            /* Clear the error state for a field as soon as the user edits it */
+            [loginNameInput, passwordInput].forEach(function (input) {
+                input.addEventListener('input', function () {
+                    const errEl = input === loginNameInput ? loginNameError : passwordError;
+                    input.classList.remove('field-error');
+                    errEl.classList.remove('show');
+                    errEl.textContent = '';
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>
